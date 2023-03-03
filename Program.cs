@@ -1,4 +1,4 @@
-﻿using MidTerm2023;
+using MidTerm2023;
 
 List<Cart> cart = new List<Cart>();
 decimal total = 0;
@@ -71,3 +71,4 @@ while (browse)
         }
     }
 }
+
