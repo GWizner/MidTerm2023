@@ -20,9 +20,8 @@ namespace MidTerm2023
     }
     public class ViewCart
     {
-        public bool CurrentCart(List<Cart> cart, decimal total, string userInputA, int itemNo, bool badName, bool browse)
+        public bool CurrentCart(List<Cart> cart, decimal total, string userInputA, int itemNo, bool browse)
         {
-            bool itemRemoved = false;
             if (browse)
             {
                 for (int i = 0; i < cart.Count; i++)
@@ -31,7 +30,6 @@ namespace MidTerm2023
                     {
                         total -= cart[i].Price;
                         cart.RemoveAt(i);
-                        badName = false;
                         return true;
                     }
                 }
@@ -45,7 +43,6 @@ namespace MidTerm2023
                     {
                         total -= cart[i].Price;
                         cart.RemoveAt(i);
-                        badName = false;
                         return true;
                     }
                 }
