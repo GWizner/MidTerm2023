@@ -70,10 +70,6 @@ while (keepAsk)
                     }
                 }
             }
-            else if (yesNo == "n")
-            {
-                browse = false;
-            }
             else
             {
                 Console.WriteLine("\nSorry, didn't catch that.\n");
