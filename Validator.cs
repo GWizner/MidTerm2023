@@ -45,7 +45,6 @@ namespace MidTerm2023
             }
             else
             {
-                Console.WriteLine("\nSorry, didn't catch that.\n");
                 return false;
             }
         }
