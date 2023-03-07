@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace MidTerm2023
 {
-  
     public class CoffeeMenu
     {
         public Dictionary<string, decimal> drinks;
@@ -50,6 +49,16 @@ namespace MidTerm2023
 
         public void DisplayDrinks()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("DRINKS MENU:");
+            Console.ResetColor();
+            foreach (var drink in drinks)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(String.Format("{0, -20}", drink.Key));
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(String.Format("{0, 10:C}", drink.Value));
+                Console.ResetColor();
             Console.WriteLine("DRINKS MENU:");
             foreach (var drink in drinks)
             {
@@ -91,4 +100,3 @@ namespace MidTerm2023
         }
     }
 
-}
