@@ -1,5 +1,3 @@
-using System;
-
 namespace MidTerm2023
 {
     class Program
