@@ -99,7 +99,6 @@ namespace MidTerm2023
                 decimal salesTax = subtotal * 0.06m;
                 decimal totalPrice = subtotal + salesTax;
 
-                
 
                 while (browse)
                 {
