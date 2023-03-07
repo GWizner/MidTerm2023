@@ -26,7 +26,7 @@ namespace MidTerm2023
                 string drinkName = null;
                 decimal drinkPrice = 0m;
 
-                                
+
                 Console.WriteLine("Would you like to see our drink menu?");
                 string userChoice1 = Console.ReadLine();
                 if (userChoice1 == "yes" || userChoice1 == "y")
@@ -75,6 +75,42 @@ namespace MidTerm2023
                 Console.WriteLine($"Subtotal: ${subtotal:F2}");
                 Console.WriteLine($"Sales Tax: ${salesTax:F2}");
                 Console.WriteLine($"Total: ${totalPrice:F2}");
+
+                Console.WriteLine("How would you like to pay today?");
+                Console.WriteLine("1. Cash");
+                Console.WriteLine("2. Credit Card");
+                Console.WriteLine("3. Check");
+
+                string tenderType = Console.ReadLine();
+
+                if (tenderType == "Cash" || tenderType == "cash" || tenderType == "1")
+                {
+                    Console.WriteLine("Enter the amount given by customer.");
+                    decimal tender = decimal.Parse(Console.ReadLine());
+                    decimal change = Payment.Cash(tender, totalPrice);
+                }
+
+                else if (tenderType == "Credit Card" || tenderType == "credit card" || tenderType == "2")
+                {
+                    Console.Write("Please enter your 16 digit credit card number: ");
+                    string creditcardnumber = Console.ReadLine();
+                    Console.WriteLine(" ");
+                    Console.Write("Please enter your cards expiration date:");
+                    string expiration = Console.ReadLine();
+                    Console.WriteLine(" ");
+                    Console.Write("Please enter your cards cvv number:");
+                    string cvv = Console.ReadLine();
+
+                    Payment.CreditCard(creditcardnumber, expiration, cvv);
+                }
+
+                else if (tenderType == "Check" || tenderType == "check" || tenderType == "3")
+                {
+                    Console.WriteLine("Please enter the check number:");
+                    int checknumber = int.Parse(Console.ReadLine());
+                    Payment.Check(checknumber);
+                }
+
                 while (browse)
                 {
                     for (int i = 0; i < cart.Count; i++)

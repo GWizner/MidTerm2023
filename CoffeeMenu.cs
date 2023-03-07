@@ -33,7 +33,7 @@ namespace MidTerm2023
 
 
             addOns = new Dictionary<string, decimal>
-        {
+            {
             { "Milk", 0.25m },
             { "Whipped Cream", 0.50m },
             { "Caramel", 0.50m },
@@ -44,7 +44,7 @@ namespace MidTerm2023
             { "Shot of Baileys", 5.00m },
             { "Shot of Vodka", 6.00m },
             { "Shot of Bourbon", 6.00m }
-        };
+            };
         }
 
         public void DisplayDrinks()
@@ -59,43 +59,40 @@ namespace MidTerm2023
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(String.Format("{0, 10:C}", drink.Value));
                 Console.ResetColor();
-            Console.WriteLine("DRINKS MENU:");
-            foreach (var drink in drinks)
-            {
-                Console.WriteLine($"{drink.Key} - ${drink.Value:F2}");
             }
         }
 
-        public void DisplayAddOns()
-        {
-            Console.WriteLine("ADD-ONS MENU:");
-            foreach (var addOn in addOns)
+            public void DisplayAddOns()
             {
-                Console.WriteLine($"{addOn.Key} - ${addOn.Value:F2}");
+                Console.WriteLine("ADD-ONS MENU:");
+                foreach (var addOn in addOns)
+                {
+                    Console.WriteLine($"{addOn.Key} - ${addOn.Value:F2}");
+                }
             }
-        }
 
-        public decimal GetDrinkPrice(string drinkName)
-        {
-            if (drinks.ContainsKey(drinkName))
+            public decimal GetDrinkPrice(string drinkName)
             {
-                return drinks[drinkName];
+                if (drinks.ContainsKey(drinkName))
+                {
+                    return drinks[drinkName];
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid drink name: {drinkName}");
+                }
             }
-            else
+            // change 
+            public decimal GetAddOnPrice(string addOnName)
             {
-                throw new ArgumentException($"Invalid drink name: {drinkName}");
-            }
-        }
-        // change 
-        public decimal GetAddOnPrice(string addOnName)
-        {
-            if (addOns.ContainsKey(addOnName))
-            {
-                return addOns[addOnName];
-            }
-            else
-            {
-                throw new ArgumentException($"Invalid add-on name: {addOnName}");
+                if (addOns.ContainsKey(addOnName))
+                {
+                    return addOns[addOnName];
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid add-on name: {addOnName}");
+                }
             }
         }
     }
