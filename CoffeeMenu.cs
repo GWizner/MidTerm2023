@@ -13,7 +13,9 @@ namespace MidTerm2023
 
         public Dictionary<string, decimal> addOns;
 
-        public CoffeeMenu()
+        public Dictionary<int, string> drinkMenu;
+
+        public CoffeeMenu(string drinkName, int drinkNum)
         {
             drinks = new Dictionary<string, decimal>
             {
@@ -31,6 +33,24 @@ namespace MidTerm2023
             { "Nitro Cold Brew", 5.50m },
             { "Iced Coffee", 3.50m }
             };
+
+            drinkMenu = new Dictionary<int, string>
+            {
+                { 1, "Espresso"},
+                { 2, "Cappuccino"},
+                { 3, "Latte"},
+                { 4, "Amricano"},
+                { 5, "Mocha"},
+                { 6, "Macchiato"},
+                { 7, "Flat White"},
+                { 8, "Irish Coffee"},
+                { 9, "Affogato"},
+                { 10, "French Press"},
+                { 11, "Cold Brew"},
+                { 12, "Nitro Cold Brew"},
+                { 13, "Iced Coffee"}
+            };
+            drinkNum = drinkMenu.FirstOrDefault(x => x.Value == drinkName).Key - 1;
 
 
             addOns = new Dictionary<string, decimal>
@@ -50,33 +70,58 @@ namespace MidTerm2023
 
         public void DisplayDrinks()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("DRINKS MENU:");
             Console.ResetColor();
+
+            int counter = 1;
             foreach (var drink in drinks)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(String.Format("{0, -20}", drink.Key));
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(String.Format("{0, 10:C}", drink.Value));
+                Console.Write(String.Format("{0, -5}{1, -17}", counter + ".", drink.Key));
+                Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Value));
+                Console.ResetColor();
+                counter++;
+            }
+        }
+        //public void DisplayDrinks()
+        //{
+        //    Console.ForegroundColor = ConsoleColor.DarkCyan;
+        //    Console.WriteLine("DRINKS MENU:");
+        //    Console.ResetColor();
+        //    foreach (var drink in drinks)
+        //    {
+        //        Console.ForegroundColor = ConsoleColor.Green;
+        //        Console.Write(String.Format("{0, -20}", drink.Key));
+        //        Console.ForegroundColor = ConsoleColor.Red;
+        //        Console.WriteLine(String.Format("{0, 10:C}", drink.Value));
+        //        Console.ResetColor();
+        //    }
+        //}
+
+        public void DisplayAddOns()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("ADD-ONS MENU:");
+            Console.ResetColor();
+            foreach (var addOn in addOns)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(String.Format("{0, -20}", addOn.Key));
+                Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", addOn.Value));
                 Console.ResetColor();
             }
         }
 
-        public void DisplayAddOns()
+        public decimal GetDrinkPrice(string drinkName, string selectedDrinkName, int drinkNum)
         {
-            Console.WriteLine("ADD-ONS MENU:");
-            foreach (var addOn in addOns)
+            if (drinks.ContainsKey(selectedDrinkName))
             {
-                Console.WriteLine($"{addOn.Key} - ${addOn.Value:F2}");
+                return drinks[selectedDrinkName];
             }
-        }
-
-        public decimal GetDrinkPrice(string drinkName)
-        {
-            if (drinks.ContainsKey(drinkName))
+            else if (drinkMenu.ContainsKey(drinkNum))
             {
-                return drinks[drinkName];
+                return drinks[selectedDrinkName];
             }
             else
             {
@@ -96,5 +141,4 @@ namespace MidTerm2023
             }
         }
     }
-
 }
