@@ -12,7 +12,9 @@ namespace MidTerm2023
 
         public Dictionary<string, decimal> addOns;
 
-        public CoffeeMenu()
+        public Dictionary<int, string> drinkMenu;
+
+        public CoffeeMenu(string drinkName, int drinkNum)
         {
             drinks = new Dictionary<string, decimal>
             {
@@ -30,6 +32,24 @@ namespace MidTerm2023
             { "Nitro Cold Brew", 5.50m },
             { "Iced Coffee", 3.50m }
             };
+
+            drinkMenu = new Dictionary<int, string>
+            {
+                { 1, "Espresso"},
+                { 2, "Cappuccino"},
+                { 3, "Latte"},
+                { 4, "Amricano"},
+                { 5, "Mocha"},
+                { 6, "Macchiato"},
+                { 7, "Flat White"},
+                { 8, "Irish Coffee"},
+                { 9, "Affogato"},
+                { 10, "French Press"},
+                { 11, "Cold Brew"},
+                { 12, "Nitro Cold Brew"},
+                { 13, "Iced Coffee"}
+            };
+            drinkNum = drinkMenu.FirstOrDefault(x => x.Value == drinkName).Key - 1;
 
 
             addOns = new Dictionary<string, decimal>
@@ -49,43 +69,67 @@ namespace MidTerm2023
 
         public void DisplayDrinks()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("DRINKS MENU:");
             Console.ResetColor();
+
+            int counter = 1;
             foreach (var drink in drinks)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(String.Format("{0, -20}", drink.Key));
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(String.Format("{0, 10:C}", drink.Value));
+                Console.Write(String.Format("{0, -5}{1, -17}", counter + ".", drink.Key));
+                Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Value));
                 Console.ResetColor();
+                counter++;
             }
         }
+        //public void DisplayDrinks()
+        //{
+        //    Console.ForegroundColor = ConsoleColor.DarkCyan;
+        //    Console.WriteLine("DRINKS MENU:");
+        //    Console.ResetColor();
+        //    foreach (var drink in drinks)
+        //    {
+        //        Console.ForegroundColor = ConsoleColor.Green;
+        //        Console.Write(String.Format("{0, -20}", drink.Key));
+        //        Console.ForegroundColor = ConsoleColor.Red;
+        //        Console.WriteLine(String.Format("{0, 10:C}", drink.Value));
+        //        Console.ResetColor();
+        //    }
+        //}
 
-            public void DisplayAddOns()
+        public void DisplayAddOns()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("ADD-ONS MENU:");
+            Console.ResetColor();
+            foreach (var addOn in addOns)
             {
-                Console.WriteLine("ADD-ONS MENU:");
-                foreach (var addOn in addOns)
-                {
-                    Console.WriteLine($"{addOn.Key} - ${addOn.Value:F2}");
-                }
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(String.Format("{0, -20}", addOn.Key));
+                Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", addOn.Value));
+                Console.ResetColor();
             }
 
-            public decimal GetDrinkPrice(string drinkName)
+        public decimal GetDrinkPrice(string drinkName, string selectedDrinkName, int drinkNum)
+        {
+            if (drinks.ContainsKey(selectedDrinkName))
             {
-                if (drinks.ContainsKey(drinkName))
-                {
-                    return drinks[drinkName];
-                }
-                else
-                {
-                    throw new ArgumentException($"Invalid drink name: {drinkName}");
-                }
+                return drinks[selectedDrinkName];
             }
-            // change 
-            public decimal GetAddOnPrice(string addOnName)
+            else if (drinkMenu.ContainsKey(drinkNum))
             {
-                if (addOns.ContainsKey(addOnName))
+                return drinks[selectedDrinkName];
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid drink name: {drinkName}");
+            }
+        }
+        
+        public decimal GetAddOnPrice(string addOnName)
+        {
+            if (addOns.ContainsKey(addOnName))
                 {
                     return addOns[addOnName];
                 }
@@ -96,4 +140,4 @@ namespace MidTerm2023
             }
         }
     }
-
+}
