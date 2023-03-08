@@ -53,7 +53,7 @@ namespace MidTerm2023
 
 
             addOns = new Dictionary<string, decimal>
-        {
+            {
             { "Milk", 0.25m },
             { "Whipped Cream", 0.50m },
             { "Caramel", 0.50m },
@@ -64,7 +64,7 @@ namespace MidTerm2023
             { "Shot of Baileys", 5.00m },
             { "Shot of Vodka", 6.00m },
             { "Shot of Bourbon", 6.00m }
-        };
+            };
         }
 
         public void DisplayDrinks()
@@ -110,7 +110,6 @@ namespace MidTerm2023
                 Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", addOn.Value));
                 Console.ResetColor();
             }
-        }
 
         public decimal GetDrinkPrice(string drinkName, string selectedDrinkName, int drinkNum)
         {
@@ -127,16 +126,17 @@ namespace MidTerm2023
                 throw new ArgumentException($"Invalid drink name: {drinkName}");
             }
         }
-        // change 
+        
         public decimal GetAddOnPrice(string addOnName)
         {
             if (addOns.ContainsKey(addOnName))
-            {
-                return addOns[addOnName];
-            }
-            else
-            {
-                throw new ArgumentException($"Invalid add-on name: {addOnName}");
+                {
+                    return addOns[addOnName];
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid add-on name: {addOnName}");
+                }
             }
         }
     }
