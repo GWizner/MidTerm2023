@@ -8,13 +8,13 @@ namespace MidTerm2023
             string drinkName = null;
             string selectedName = null;
             string selectedDrinkName = null;
+            int quantity = 0;
             int drinkNum = 0;
             decimal drinkPrice = 0m;
             decimal addOnPrice = 0.0m;
             bool goodDrink = false;
 
             List<Cart> cart = new List<Cart>();
-            decimal total = 0;
             int itemNo = 0;
             string userInputA = null;
             bool cashOut = false;
@@ -40,35 +40,46 @@ namespace MidTerm2023
                     goodDrink = int.TryParse(drinkName, out drinkNum);
                     selectedName = menu.drinks.Keys.FirstOrDefault(x => x.Equals(drinkName, StringComparison.OrdinalIgnoreCase));
 
-                    if (goodDrink)
+                    if (selectedName != null || goodDrink)
                     {
-                        selectedDrinkName = menu.drinkMenu[drinkNum];
-                        drinkPrice = menu.drinks[selectedDrinkName];
-                    }
-                    else
-                    {
-                        drinkPrice = menu.drinks[selectedName];
-                    }
-                    
-
-                    if (goodDrink != null)
-                    {
+                        if (goodDrink)
+                        {
+                            selectedDrinkName = menu.drinkMenu[drinkNum];
+                            //drinkPrice = menu.drinks[selectedDrinkName];
+                            selectedName = selectedDrinkName;
+                        }
+                        else
+                        {
+                            //drinkPrice = menu.drinks[selectedName];
+                        }
                         foreach (var drink in menu.drinks)
                         {
                             if (drink.Key.Equals(drinkName, StringComparison.OrdinalIgnoreCase))
                             {
-                                cart.Add(new Cart(selectedName, drinkPrice));
-                                total = total + menu.drinks[selectedName];
+                                cart.Add(new Cart(selectedName, drinkPrice, quantity));
+                                drinkPrice = drinkPrice + menu.drinks[selectedName];
                                 break;
                             }
                             else if (menu.drinkMenu.ContainsKey(drinkNum))
                             {
-                                cart.Add(new Cart(selectedDrinkName, drinkPrice));
-                                total = total + drinkPrice;
+                                cart.Add(new Cart(selectedDrinkName, drinkPrice, quantity));
+                                drinkPrice = drinkPrice + menu.drinks[selectedDrinkName];
                                 break;
                             }
-                        } 
+                        }
+
+                        if (selectedName.EndsWith('s'))
+                        {
+                            Console.Write($"\nHow many {selectedName}es would you like? ");
+                        }
+                        else
+                        {
+                            Console.Write($"\nHow many {selectedName}s would you like? ");
+                        }
+                        quantity = int.Parse(Console.ReadLine());
+                        //cart.Add(new Cart(selectedName, drinkPrice, quantity));
                     }
+
                 }
 
                 // Get the user's add-on selections
@@ -92,7 +103,7 @@ namespace MidTerm2023
                     drinkPrice = menu.GetDrinkPrice(drinkName, selectedDrinkName, drinkNum);
                     foreach (string addOnName in addOnChoices)
                     {
-                        addOnPrice += menu.GetAddOnPrice(addOnName.Trim());
+                        addOnPrice += menu.GetAddOnPrice(addOnName);
                     }
                 }
                 decimal subtotal = drinkPrice + addOnPrice;
@@ -107,8 +118,9 @@ namespace MidTerm2023
                     {
                         //Thread.Sleep(500);
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write("{0,-20}", cart[i].Name);
-                        Console.WriteLine("\x1b[31m" + "{0,12:C}", cart[i].Price);
+                        Console.Write("{0,-15}", cart[i].Name);
+                        Console.Write("{0, 0}", cart[i].Quantity);    
+                        Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].Price);
                         Console.ResetColor();
                     }
 
@@ -142,7 +154,7 @@ namespace MidTerm2023
                                     Console.WriteLine("Please enter the name or item number of the item you would like to remove: ");
                                     userInputA = Console.ReadLine().ToLower();
                                     browse = int.TryParse(userInputA, out itemNo);
-                                    bool itemRemoved = mycart.CurrentCart(cart, total, userInputA, itemNo, browse);
+                                    bool itemRemoved = mycart.CurrentCart(cart, subtotal, userInputA, itemNo, browse);
                                     if (itemRemoved)
                                     {
                                         Console.WriteLine("\nItem not found in list.\n");
@@ -160,7 +172,7 @@ namespace MidTerm2023
                             browse = true;
                         }
                     }
-                    Console.WriteLine("How would you like to pay today?");
+                    Console.WriteLine("\nHow would you like to pay today?\n");
                     Console.WriteLine("1. Cash");
                     Console.WriteLine("2. Credit Card");
                     Console.WriteLine("3. Check");
