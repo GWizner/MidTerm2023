@@ -11,16 +11,18 @@ namespace MidTerm2023
 
         public string Name { get; private set; }
         public decimal Price { get; private set; }
-        public Cart(string newName, decimal newPrice)
+        public int Quantity { get; private set; }
+        public Cart(string drinkName, decimal drinkPrice, int quantity)
         {
-            Name = newName;
-            Price = newPrice;
+            Name = drinkName;
+            Price = drinkPrice;
+            Quantity = quantity;
         }
 
     }
     public class ViewCart
     {
-        public bool CurrentCart(List<Cart> cart, decimal total, string userInputA, int itemNo, bool browse)
+        public bool CurrentCart(List<Cart> cart, decimal drinkPrice, string userInputA, int itemNo, bool browse)
         {
             if (browse)
             {
@@ -28,7 +30,7 @@ namespace MidTerm2023
                 {
                     if (i + 1 == itemNo)
                     {
-                        total -= cart[i].Price;
+                        drinkPrice -= cart[i].Price;
                         cart.RemoveAt(i);
                         return true;
                     }
@@ -41,7 +43,7 @@ namespace MidTerm2023
                 {
                     if (cart[i].Name.Equals(userInputA, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        total -= cart[i].Price;
+                        drinkPrice -= cart[i].Price;
                         cart.RemoveAt(i);
                         return true;
                     }
