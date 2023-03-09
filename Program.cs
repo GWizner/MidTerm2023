@@ -187,6 +187,11 @@ namespace MidTerm2023
                         Console.WriteLine("Enter the amount given by customer.");
                         decimal tender = decimal.Parse(Console.ReadLine());
                         decimal change = Payment.Cash(tender, totalPrice);
+                        Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
+                        Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
+                        Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Sales Tax:" + "\x1b[31m", salesTax);
+                        Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", totalPrice);
+                        Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Change:" + "\x1b[31m", change);
                     }
 
                     else if (tenderType == "Credit Card" || tenderType == "credit card" || tenderType == "2")
@@ -200,14 +205,15 @@ namespace MidTerm2023
                         Console.Write("Please enter your cards cvv number:");
                         string cvv = Console.ReadLine();
 
-                        Payment.CreditCard(creditcardnumber, expiration, cvv);
+                        Console.WriteLine(Payment.CreditCard(creditcardnumber, expiration, cvv));
+
                     }
 
                     else if (tenderType == "Check" || tenderType == "check" || tenderType == "3")
                     {
                         Console.WriteLine("Please enter the check number:");
                         int checknumber = int.Parse(Console.ReadLine());
-                        Payment.Check(checknumber);
+                        Console.WriteLine(Payment.Check(checknumber));
                     }
 
                 }
