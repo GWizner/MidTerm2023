@@ -38,7 +38,7 @@ namespace MidTerm2023
                 { 1, "Espresso"},
                 { 2, "Cappuccino"},
                 { 3, "Latte"},
-                { 4, "Amricano"},
+                { 4, "Americano"},
                 { 5, "Mocha"},
                 { 6, "Macchiato"},
                 { 7, "Flat White"},
@@ -77,8 +77,15 @@ namespace MidTerm2023
             foreach (var drink in drinks)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(String.Format("{0, -5}{1, -17}", counter + ".", drink.Key));
-                Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Value));
+                Console.Write(String.Format("{0, -1}{1, -17}", counter + ".", drink.Key));
+                if (counter > 9)
+                {
+                    Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Value)); 
+                }
+                else
+                {
+                    Console.WriteLine(String.Format("\x1b[31m" + "{0, 11:C}", drink.Value));
+                }
                 Console.ResetColor();
                 counter++;
             }
@@ -110,7 +117,7 @@ namespace MidTerm2023
                 Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", addOn.Value));
                 Console.ResetColor();
             }
-
+        }
         public decimal GetDrinkPrice(string drinkName, string selectedDrinkName, int drinkNum)
         {
             if (drinks.ContainsKey(selectedDrinkName))
@@ -126,17 +133,16 @@ namespace MidTerm2023
                 throw new ArgumentException($"Invalid drink name: {drinkName}");
             }
         }
-        
+
         public decimal GetAddOnPrice(string addOnName)
         {
             if (addOns.ContainsKey(addOnName))
-                {
-                    return addOns[addOnName];
-                }
-                else
-                {
-                    throw new ArgumentException($"Invalid add-on name: {addOnName}");
-                }
+            {
+                return addOns[addOnName];
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid add-on name: {addOnName}");
             }
         }
     }

@@ -12,10 +12,10 @@ namespace MidTerm2023
         public string Name { get; private set; }
         public decimal Price { get; private set; }
         public int Quantity { get; private set; }
-        public Cart(string drinkName, decimal drinkPrice, int quantity)
+        public Cart(string drinkName, decimal drinkTotal, int quantity)
         {
             Name = drinkName;
-            Price = drinkPrice;
+            Price = drinkTotal;
             Quantity = quantity;
         }
 
