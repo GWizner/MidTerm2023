@@ -10,6 +10,7 @@ namespace MidTerm2023
             string selectedDrinkName = null;
             int quantity = 0;
             int drinkNum = 0;
+            decimal drinkTotal = 0m;
             decimal drinkPrice = 0m;
             decimal addOnPrice = 0.0m;
             bool goodDrink = false;
@@ -45,27 +46,12 @@ namespace MidTerm2023
                         if (goodDrink)
                         {
                             selectedDrinkName = menu.drinkMenu[drinkNum];
-                            //drinkPrice = menu.drinks[selectedDrinkName];
+                            drinkPrice = menu.drinks[selectedDrinkName];
                             selectedName = selectedDrinkName;
                         }
                         else
                         {
-                            //drinkPrice = menu.drinks[selectedName];
-                        }
-                        foreach (var drink in menu.drinks)
-                        {
-                            if (drink.Key.Equals(drinkName, StringComparison.OrdinalIgnoreCase))
-                            {
-                                cart.Add(new Cart(selectedName, drinkPrice, quantity));
-                                drinkPrice = drinkPrice + menu.drinks[selectedName];
-                                break;
-                            }
-                            else if (menu.drinkMenu.ContainsKey(drinkNum))
-                            {
-                                cart.Add(new Cart(selectedDrinkName, drinkPrice, quantity));
-                                drinkPrice = drinkPrice + menu.drinks[selectedDrinkName];
-                                break;
-                            }
+                            drinkPrice = menu.drinks[selectedName];
                         }
 
                         if (selectedName.EndsWith('s'))
@@ -78,6 +64,24 @@ namespace MidTerm2023
                         }
                         quantity = int.Parse(Console.ReadLine());
                         //cart.Add(new Cart(selectedName, drinkPrice, quantity));
+
+                        foreach (var drink in menu.drinks)
+                        {
+                            if (drink.Key.Equals(drinkName, StringComparison.OrdinalIgnoreCase))
+                            {
+                                drinkTotal += drinkPrice * quantity;
+                                cart.Add(new Cart(selectedName, drinkTotal, quantity));
+                                //drinkTotal = drinkTotal + menu.drinks[selectedName];
+                                break;
+                            }
+                            else if (menu.drinkMenu.ContainsKey(drinkNum))
+                            {
+                                drinkTotal += drinkPrice * quantity;
+                                cart.Add(new Cart(selectedDrinkName, drinkTotal, quantity));
+                                //drinkTotal = drinkTotal + menu.drinks[selectedDrinkName];
+                                break;
+                            }
+                        }
                     }
 
                 }
@@ -100,13 +104,13 @@ namespace MidTerm2023
                     string[] addOnChoices = selectedAddOns.Split(',');
 
                     // Calculate the total price
-                    drinkPrice = menu.GetDrinkPrice(drinkName, selectedDrinkName, drinkNum);
+                    drinkTotal = menu.GetDrinkPrice(drinkName, selectedDrinkName, drinkNum);
                     foreach (string addOnName in addOnChoices)
                     {
                         addOnPrice += menu.GetAddOnPrice(addOnName);
                     }
                 }
-                decimal subtotal = drinkPrice + addOnPrice;
+                decimal subtotal = drinkTotal + addOnPrice;
                 decimal salesTax = subtotal * 0.06m;
                 decimal totalPrice = subtotal + salesTax;
 
@@ -117,9 +121,9 @@ namespace MidTerm2023
                     {
                         //Thread.Sleep(500);
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write("{0,-15}", cart[i].Name);
-                        Console.Write("{0, 0}", cart[i].Quantity);    
-                        Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].Price);
+                        Console.Write(i + 1 + ".{0,-13}", cart[i].Name);
+                        Console.Write("{0, 2}", cart[i].Quantity);    
+                        Console.WriteLine("\x1b[31m" + "{0,15:C}", cart[i].Price);
                         Console.ResetColor();
                     }
 
