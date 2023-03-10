@@ -15,7 +15,7 @@ namespace MidTerm2023
             decimal addOnPrice = 0.0m;
             bool goodDrink = false;
 
-            List<Cart> cart = new List<Cart>();
+
             int itemNo = 0;
             string userInputA = null;
             bool cashOut = false;
@@ -23,7 +23,9 @@ namespace MidTerm2023
             bool badName = false;
             bool keepAsk = true;
 
-            CoffeeMenu menu = new CoffeeMenu(drinkName, drinkNum);
+            List<Cart> cart = new List<Cart>();
+            List<CoffeeMenu> coffees = new List<CoffeeMenu>();
+            CoffeeMenu menu = new CoffeeMenu();
             ViewCart mycart = new ViewCart();
 
             Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
@@ -35,11 +37,11 @@ namespace MidTerm2023
                 if (userChoice1 == "yes" || userChoice1 == "y")
                 {
                     Console.WriteLine();
-                    menu.DisplayDrinks();
+                    menu.DisplayDrinks(coffees);
                     Console.Write("\nEnter the name of your coffee drink: ");
                     drinkName = Console.ReadLine().ToLower();
                     goodDrink = int.TryParse(drinkName, out drinkNum);
-                    selectedName = menu.drinks.Keys.FirstOrDefault(x => x.Equals(drinkName, StringComparison.OrdinalIgnoreCase));
+                    selectedName = coffees(x => x.Equals(drinkName, StringComparison.OrdinalIgnoreCase));
 
                     if (selectedName != null || goodDrink)
                     {
@@ -122,7 +124,7 @@ namespace MidTerm2023
                         //Thread.Sleep(500);
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write(i + 1 + ".{0,-13}", cart[i].Name);
-                        Console.Write("{0, 2}", cart[i].Quantity);    
+                        Console.Write("{0, 2}", cart[i].Quantity);
                         Console.WriteLine("\x1b[31m" + "{0,15:C}", cart[i].Price);
                         Console.ResetColor();
                     }
