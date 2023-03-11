@@ -34,21 +34,6 @@ namespace MidTerm2023
             CoffeeMenu menu = new CoffeeMenu(id, name, description, price);
 
             List<CoffeeMenu> coffees = new List<CoffeeMenu>();
-            //{
-            //    menuList.Add(new CoffeeMenu() { Id = 1, Name = "Espresso", Price = 2.50m, Description = "A strong, concentrated coffee made by forcing hot water through finely ground coffee beans under high pressure." });
-            //    menuList.Add(new CoffeeMenu() { Id = 2, Name = "Cappuccino", Price = 3.50m, Description = "A classic Italian coffee beverage made with equal parts espresso, steamed milk, and frothed milk." };
-            //    menuList.Add(new CoffeeMenu() { Id = 3, Name = "Latte", Price = 4.00m, Description = "A coffee beverage made with espresso and steamed milk, often topped with a small layer of frothed milk." },
-            //    new CoffeeMenu { Id = 4, Name = "Americano", Price = 3.00m, Description = "A coffee beverage made by adding hot water to a shot of espresso." },
-            //    new CoffeeMenu { Id = 5, Name = "Mocha", Price = 4.50m, Description = "A coffee beverage made with espresso, steamed milk, and chocolate syrup or powder." },
-            //    new CoffeeMenu { Id = 6, Name = "Macchiato", Price = 3.50m, Description = "A coffee beverage made with espresso and a small amount of frothed milk." },
-            //    new CoffeeMenu { Id = 7, Name = "Flat White", Price = 4.50m, Description = "A coffee beverage similar to a latte, but with a higher ratio of espresso to milk." },
-            //    new CoffeeMenu { Id = 8, Name = "Irish Coffee", Price = 6.00m, Description = "A cocktail made with hot coffee, Irish whiskey, and sugar, topped with whipped cream." },
-            //    new CoffeeMenu { Id = 9, Name = "Affogato", Price = 5.00m, Description = "A dessert beverage made by pouring a shot of espresso over a scoop of vanilla ice cream or gelato." },
-            //    new CoffeeMenu { Id = 10, Name = "French Press", Price = 6.50m, Description = "A brewing method that involves steeping coarse coffee grounds in hot water, and then pressing the mixture through a metal or mesh filter." },
-            //    new CoffeeMenu { Id = 11, Name = "Cold Brew", Price = 4.50m, Description = "A coffee beverage made by steeping coarse coffee grounds in cold water for an extended period of time, often 12-24 hours." },
-            //    new CoffeeMenu { Id = 12, Name = "Nitro Cold Brew", Price = 5.00m, Description = "A type of cold brew coffee that is infused with nitrogen gas, giving it a creamy, velvety texture and a foamy top similar to a draft beer." },
-            //    new CoffeeMenu { Id = 13, Name = "Iced Coffee", Price = 3.50m, Description = "A coffee beverage served over ice, often made by brewing hot coffee and then chilling it or pouring it over ice." }
-            //};
             ViewCart mycart = new ViewCart();
 
 
