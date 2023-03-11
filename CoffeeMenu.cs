@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -195,15 +195,15 @@ namespace MidTerm2023
         //    }
         //}
 
-        public static decimal GetAddOnPrice(Dictionary<string, decimal> addOns, string addOnName)
+        public decimal GetAddOnPrice(string selectedAddOn)
         {
-            if (addOns.ContainsKey(addOnName))
+            if (addOns.ContainsKey(selectedAddOn))
             {
-                return addOns[addOnName];
+                return addOns[selectedAddOn];
             }
             else
             {
-                throw new ArgumentException($"Invalid add-on name: {addOnName}");
+                throw new ArgumentException($"Invalid add-on name: {selectedAddOn}");
             }
         }
     }

@@ -9,28 +9,28 @@ namespace MidTerm2023
     public class Payment
     {
         //decimal change = 0;
-        public decimal Cash(decimal tender, decimal orderTotal)
+        public static decimal Cash(decimal tender, decimal orderTotal)
         {
-           decimal change = 0;
-           return change = Math.Round(tender - orderTotal); // - orderTotal//
+            decimal change = 0;
+            return change = tender - orderTotal; // - orderTotal//
         }
 
-        public void CreditCard()
+        public static string CreditCard(string ccnumber, string ccexp, string cccvv)
         {
-            Console.Write("Please enter your 16 digit credit card number: ");
-            string creditcardnumber = Console.ReadLine();
-            Console.WriteLine(" ");
-            Console.Write("Please enter your cards expiration date:");
-            string expiration = Console.ReadLine();
-            Console.WriteLine(" ");
-            Console.Write("Please enter your cards cvv number:");
-            string cvv = Console.ReadLine();
+            if (ccnumber == null || ccexp == null || cccvv == null)
+            {
+                return "Declined";
+            }
+
+            else
+            {
+                return "Approved";
+            }
         }
 
-        public void Check()
+        public static string Check(int checknumber)
         {
-            Console.WriteLine("Please enter your check number:");
-            int checknunber = int.Parse(Console.ReadLine());
+            return "Thank you for your payment";
         }
     }
 }
