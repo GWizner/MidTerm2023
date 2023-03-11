@@ -21,6 +21,8 @@ namespace MidTerm2023
             DrinkQuantity = quantity;
             AddOnName = addOnName;
             AddOnPrice = addOnPrice;
+
+            
         }
     }
     public class ViewCart
