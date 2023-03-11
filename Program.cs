@@ -12,11 +12,14 @@ namespace MidTerm2023
             string selectedDrinkName = null;
             int quantity = 0;
             int drinkNum = 0;
-            decimal totalPrice = 0m;
-            //decimal drinkTotal = 0m;
             decimal drinkPrice = 0m;
             decimal addOnPrice = 0m;
             decimal addOnTotal = 0m;
+            decimal drinkTotal = 0m;
+            decimal subtotal = 0m;
+            decimal salesTax = 0m;
+            decimal totalPrice = 0m;
+
             bool goodDrink = false;
             bool endsWithS = false;
 
@@ -169,9 +172,9 @@ namespace MidTerm2023
                     {
                         addOnTotal += cart[i].AddOnPrice;
                     }
-                    decimal drinkTotal = drinkPrice * quantity;
-                    decimal subtotal = drinkTotal + addOnTotal;
-                    decimal salesTax = subtotal * 0.06m;
+                    drinkTotal = drinkPrice * quantity;
+                    subtotal = drinkTotal + addOnTotal;
+                    salesTax = subtotal * 0.06m;
                     totalPrice = subtotal + salesTax;
 
                     while (browse)
@@ -181,31 +184,31 @@ namespace MidTerm2023
                         HashSet<string> drinkNames = new HashSet<string>();
                         //while (i < cart.Count)
                         //{
-                            for (i = 0; i < cart.Count; i++)
+                        for (i = 0; i < cart.Count; i++)
+                        {
+                            string thisDrinkName = cart[i].DrinkName;
+                            //decimal thisDrinkPrice = cart[i].DrinkPrice;
+                            int thisDrinkQuantity = cart[i].DrinkQuantity;
+                            //Thread.Sleep(500);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            if (!drinkNames.Contains(thisDrinkName))
                             {
-                                string thisDrinkName = cart[i].DrinkName;
-                                //decimal thisDrinkPrice = cart[i].DrinkPrice;
-                                int thisDrinkQuantity = cart[i].DrinkQuantity;
-                                //Thread.Sleep(500);
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                if (!drinkNames.Contains(thisDrinkName))
-                                {
-                                    Console.Write("{0,-15}", thisDrinkName);
-                                    Console.Write("\x1b[38;5;80m" + "{0}", thisDrinkQuantity);
-                                    Console.WriteLine("\x1b[31m" + "{0,16:C}", drinkTotal);
-                                    drinkNames.Add(thisDrinkName);
-                                    //break;
-                                }
+                                Console.Write("{0,-15}", thisDrinkName);
+                                Console.Write("\x1b[38;5;80m" + "{0}", thisDrinkQuantity);
+                                Console.WriteLine("\x1b[31m" + "{0,16:C}", drinkTotal);
+                                drinkNames.Add(thisDrinkName);
+                                //break;
+                            }
 
-                                if (cart[i].AddOnName != null)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("{0,-15}", cart[i].AddOnName);
-                                    Console.Write("{0}", 1);
-                                    Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].AddOnPrice);
-                                    Console.ResetColor();
-                                }
-                            } 
+                            if (cart[i].AddOnName != null)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write("{0,-15}", cart[i].AddOnName);
+                                Console.Write("{0}", 1);
+                                Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].AddOnPrice);
+                                Console.ResetColor();
+                            }
+                        }
                         //}
                         Thread.Sleep(800);
                         Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
@@ -255,44 +258,50 @@ namespace MidTerm2023
                                 browse = true;
                             }
                         }
-                        Console.WriteLine("\nHow would you like to pay today?\n");
-                        Console.WriteLine("1. Cash");
-                        Console.WriteLine("2. Credit Card");
-                        Console.WriteLine("3. Check");
-
-                        string tenderType = Console.ReadLine();
-
-                        if (tenderType == "Cash" || tenderType == "cash" || tenderType == "1")
-                        {
-                            Console.WriteLine("Enter the amount given by customer.");
-                            decimal tender = decimal.Parse(Console.ReadLine());
-                            decimal change = Payment.Cash(tender, myCart.TotalPrice);
-                        }
-
-                        else if (tenderType == "Credit Card" || tenderType == "credit card" || tenderType == "2")
-                        {
-                            Console.Write("Please enter your 16 digit credit card number: ");
-                            string creditcardnumber = Console.ReadLine();
-                            Console.WriteLine(" ");
-                            Console.Write("Please enter your cards expiration date:");
-                            string expiration = Console.ReadLine();
-                            Console.WriteLine(" ");
-                            Console.Write("Please enter your cards cvv number:");
-                            string cvv = Console.ReadLine();
-
-                            Payment.CreditCard(creditcardnumber, expiration, cvv);
-                        }
-
-                        else if (tenderType == "Check" || tenderType == "check" || tenderType == "3")
-                        {
-                            Console.WriteLine("Please enter the check number:");
-                            int checknumber = int.Parse(Console.ReadLine());
-                            Payment.Check(checknumber);
-                        }
-
                     }
-                    keepAsk = Validator.getContinue();
                 }
+                keepAsk = Validator.getContinue();
+            }
+            Console.WriteLine("\nHow would you like to pay today?\n");
+            Console.WriteLine("1. Cash");
+            Console.WriteLine("2. Credit Card");
+            Console.WriteLine("3. Check");
+
+            string tenderType = Console.ReadLine();
+
+            if (tenderType == "Cash" || tenderType == "cash" || tenderType == "1")
+            {
+                Console.WriteLine("Enter the amount given by customer.");
+                decimal tender = decimal.Parse(Console.ReadLine());
+                decimal change = Payment.Cash(tender, totalPrice);
+                Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
+                Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
+                Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Sales Tax:" + "\x1b[31m", salesTax);
+                Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", totalPrice);
+                Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Tender:" + "\x1b[31m", tender);
+                Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Change:" + "\x1b[31m", change);
+            }
+
+            else if (tenderType == "Credit Card" || tenderType == "credit card" || tenderType == "2")
+            {
+                Console.Write("Please enter your 16 digit credit card number: ");
+                string creditcardnumber = Console.ReadLine();
+                Console.WriteLine(" ");
+                Console.Write("Please enter your cards expiration date:");
+                string expiration = Console.ReadLine();
+                Console.WriteLine(" ");
+                Console.Write("Please enter your cards cvv number:");
+                string cvv = Console.ReadLine();
+
+                Console.WriteLine(Payment.CreditCard(creditcardnumber, expiration, cvv));
+
+            }
+
+            else if (tenderType == "Check" || tenderType == "check" || tenderType == "3")
+            {
+                Console.WriteLine("Please enter the check number:");
+                int checknumber = int.Parse(Console.ReadLine());
+                Console.WriteLine(Payment.Check(checknumber));
             }
         }
     }
