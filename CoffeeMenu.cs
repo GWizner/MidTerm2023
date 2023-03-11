@@ -8,56 +8,64 @@ namespace MidTerm2023
 {
     public class CoffeeMenu
     {
-            //public int Id { get; set; }
-            //public string Name { get; set; }
-            //public decimal Price { get; set; }
-            //public string Description { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
 
-        //public CoffeeMenu(int id, string name, string description, decimal price)
+        public CoffeeMenu(int id, string name, string description, decimal price)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            Price = price;
+
+        }
+
+        public List<CoffeeMenu> coffees = new List<CoffeeMenu>
+            {
+            new CoffeeMenu (1, "Espresso", "Strong.", 2.50m) ,
+            new CoffeeMenu (2, "Cappuccino", "Classic.", 3.50m),
+            new CoffeeMenu (3, "Latte", "Frothed milk.", 4.00m),
+            new CoffeeMenu (4, "Americano", "Hot.", 3.00m),
+            new CoffeeMenu (5, "Mocha", "Chocolate.", 4.50m),
+            new CoffeeMenu (6, "Macchiato", "Beverage.", 3.50m),
+            new CoffeeMenu (7, "Flat White", "Similar.", 4.50m),
+            new CoffeeMenu (8, "Irish Coffee", "Cocktail.", 6.00m),
+            new CoffeeMenu (9, "Affogato", "Vanilla.", 5.00m),
+            new CoffeeMenu (10, "French Press", "Coarse.", 6.50m),
+            new CoffeeMenu (11, "Cold Brew", "Cold.", 4.50m),
+            new CoffeeMenu (12, "Nitro Cold Brew", "Nitrogen.", 5.00m),
+            new CoffeeMenu (13, "Iced Coffee", "Iced.", 3.50m)
+        };
+
+        //public static void DisplayDrinks(string[] args)
         //{
-        //    Id = id;
-        //    Name = name;
-        //    Description = description;
-        //    Price = price;
+        //    CoffeeMenu menu = new CoffeeMenu();
+        //    List<CoffeeMenu> coffees = menu.menuList;
+
+        //    Console.ForegroundColor = ConsoleColor.DarkCyan;
+        //    Console.WriteLine("DRINKS MENU:");
+        //    Console.ResetColor();
+
+
+        //    foreach (var drink in coffees)
+        //    {
+        //        Console.ForegroundColor = ConsoleColor.Green;
+        //        Console.Write(String.Format("{0, -1}{1, -17}", counter + ".", drink.Id));
+        //        if (counter > 9)
+        //        {
+        //            Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Name));
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine(String.Format("\x1b[31m" + "{0, 11:C}", drink.Name));
+        //        }
+        //        Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Price));
+        //        Console.ResetColor();
+        //    }
         //}
 
-        //List<CoffeeMenu> coffees = new List<CoffeeMenu>
-        //    { 
-        //    new CoffeeMenu (1, "Espresso", "Strong.", 2.50m) ,
-        //    new CoffeeMenu (2, "Cappuccino", "Classic.", 3.50m),
-        //    new CoffeeMenu (3, "Latte", "Frothed milk.", 4.00m),
-        //    new CoffeeMenu (4, "Americano", "Hot.", 3.00m),
-        //    new CoffeeMenu (5, "Mocha", "Chocolate.", 4.50m),
-        //    new CoffeeMenu (6, "Macchiato", "Beverage.", 3.50m),
-        //    new CoffeeMenu (7, "Flat White", "Similar.", 4.50m),
-        //    new CoffeeMenu (8, "Irish Coffee", "Cocktail.", 6.00m),
-        //    new CoffeeMenu (9, "Affogato", "Vanilla.", 5.00m),
-        //    new CoffeeMenu (10, "French Press", "Coarse.", 6.50m),
-        //    new CoffeeMenu (11, "Cold Brew", "Cold.", 4.50m),
-        //    new CoffeeMenu (12, "Nitro Cold Brew", "Nitrogen.", 5.00m),
-        //    new CoffeeMenu (13, "Iced Coffee", "Iced.", 3.50m)
-        //};
-
-
-
-            public Dictionary<string, decimal> drinks;
-
-        List<CoffeeMenu> coffees = new List<CoffeeMenu>
-        {
-            new CoffeeMenu { Id = 1, Name = "Espresso", Price = 2.50m, Description = "A strong, concentrated coffee made by forcing hot water through finely ground coffee beans under high pressure." },
-            new CoffeeMenu { Id = 2, Name = "Cappuccino", Price = 3.50m, Description = "A classic Italian coffee beverage made with equal parts espresso, steamed milk, and frothed milk." },
-            new CoffeeMenu { Id = 3, Name = "Latte", Price = 4.00m, Description = "A coffee beverage made with espresso and steamed milk, often topped with a small layer of frothed milk." },
-            new CoffeeMenu { Id = 4, Name = "Americano", Price = 3.00m, Description = "A coffee beverage made by adding hot water to a shot of espresso." },
-            new CoffeeMenu { Id = 5, Name = "Mocha", Price = 4.50m, Description = "A coffee beverage made with espresso, steamed milk, and chocolate syrup or powder." },
-            new CoffeeMenu { Id = 6, Name = "Macchiato", Price = 3.50m, Description = "A coffee beverage made with espresso and a small amount of frothed milk." },
-            new CoffeeMenu { Id = 7, Name = "Flat White", Price = 4.50m, Description = "A coffee beverage similar to a latte, but with a higher ratio of espresso to milk." },
-            new CoffeeMenu { Id = 8, Name = "Irish Coffee", Price = 6.00m, Description = "A cocktail made with hot coffee, Irish whiskey, and sugar, topped with whipped cream." },
-            new CoffeeMenu { Id = 9, Name = "Affogato", Price = 5.00m, Description = "A dessert beverage made by pouring a shot of espresso over a scoop of vanilla ice cream or gelato." },
-            new CoffeeMenu { Id = 10, Name = "French Press", Price = 6.50m, Description = "A brewing method that involves steeping coarse coffee grounds in hot water, and then pressing the mixture through a metal or mesh filter." },
-            new CoffeeMenu { Id = 11, Name = "Cold Brew", Price = 4.50m, Description = "A coffee beverage made by steeping coarse coffee grounds in cold water for an extended period of time, often 12-24 hours." },
-            new CoffeeMenu { Id = 12, Name = "Nitro Cold Brew", Price = 5.00m, Description = "A type of cold brew coffee that is infused with nitrogen gas, giving it a creamy, velvety texture and a foamy top similar to a draft beer." },
-            new CoffeeMenu { Id = 13, Name = "Iced Coffee", Price = 3.50m, Description = "A coffee beverage served over ice, often made by brewing hot coffee and then chilling it or pouring it over ice." }
-        };
 
         public void DisplayDrinks(List<CoffeeMenu> coffees)
         {
@@ -69,16 +77,18 @@ namespace MidTerm2023
             foreach (var drink in coffees)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(String.Format("{0, -1}{1, -17}", counter + ".", drink.Id));
+                Console.Write(String.Format("{0, -1}", drink.Id + "."));
                 if (counter > 9)
                 {
-                    Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Name));
+                    Console.Write(String.Format("\x1b[31m" + "{0, 10:C}", drink.Name));
                 }
                 else
                 {
-                    Console.WriteLine(String.Format("\x1b[31m" + "{0, 11:C}", drink.Name));
+                    Console.Write(String.Format("\x1b[31m" + "{0, 11:C}", drink.Name));
                 }
-                Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Price));
+                Console.Write(String.Format("\x1b[31m" + "{0, 10:C}", drink.Price));
+                Console.Write(String.Format("\x1b[31m" + "{0, 10:C}", drink.Description));
+                Console.WriteLine(" ");
                 Console.ResetColor();
                 counter++;
             }

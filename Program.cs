@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace MidTerm2023
 {
     class Program
@@ -24,7 +26,6 @@ namespace MidTerm2023
             bool endsWithS = false;
 
 
-
             int itemNo = 0;
             string userInputA = null;
             bool cashOut = false;
@@ -32,12 +33,21 @@ namespace MidTerm2023
             bool badName = false;
             bool keepAsk = true;
 
+            int id = 0;
+            string name = null;
+            decimal price = 0;
+            string description = null;
+
             List<Cart> cart = new List<Cart>();
+            CoffeeMenu menu = new CoffeeMenu(id, name, description, price);
+
             List<CoffeeMenu> coffees = new List<CoffeeMenu>();
-            CoffeeMenu menu = new CoffeeMenu();
             ViewCart mycart = new ViewCart();
 
+
             Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
+
+
 
             while (keepAsk)
             {
@@ -307,6 +317,4 @@ namespace MidTerm2023
         }
     }
 }
-
-
 
