@@ -12,19 +12,19 @@ namespace MidTerm2023
         public static decimal Cash(decimal tender, decimal orderTotal)
         {
             decimal change = 0;
-            return change = Math.Round(tender - orderTotal); // - orderTotal//
+            return change = tender - orderTotal; // - orderTotal//
         }
 
         public static string CreditCard(string ccnumber, string ccexp, string cccvv)
         {
             if (ccnumber == null || ccexp == null || cccvv == null)
             {
-                return "Invalid response";
+                return "Declined";
             }
 
             else
             {
-                return "Payment accepted";
+                return "Approved";
             }
         }
 
