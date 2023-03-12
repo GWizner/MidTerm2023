@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Channels;
 
 namespace MidTerm2023
@@ -14,6 +15,7 @@ namespace MidTerm2023
             string userInputA = null;
             string name = null;
             string description = null;
+            string selectedName = null;
             //string selectedAddOn = null;
 
 
@@ -42,7 +44,7 @@ namespace MidTerm2023
             bool keepAsk = true;
 
             
-            CoffeeMenu selectedName = null;
+            
             CoffeeMenu menu = new CoffeeMenu(id, name, description, price);
             ViewCart myCart = new ViewCart();
             List<Cart> cart = new List<Cart>();
@@ -72,7 +74,7 @@ namespace MidTerm2023
             {
 
                 bool goodAns = false;
-                selectedName = coffees.FirstOrDefault(x => x.Name.Equals(userDrink, StringComparison.OrdinalIgnoreCase));
+                
 
 
                 Console.WriteLine("Would you like to see our drink menu (y/n)? ");
@@ -108,7 +110,7 @@ namespace MidTerm2023
                         Console.Write("\nEnter the name of your coffee drink: ");
                         userDrink = Console.ReadLine().ToLower();
                         goodDrink = int.TryParse(userDrink, out drinkNum);
-                        
+                        //selectedName = coffees.FirstOrDefault(x => x.Name.Equals(userDrink, StringComparison.OrdinalIgnoreCase));
                         if (goodDrink)
                         {
                             if (drinkNum < 1 || drinkNum > 13)
@@ -129,11 +131,14 @@ namespace MidTerm2023
                                 {
                                     if (coffeeSearch.Name.Contains(userDrink, StringComparison.CurrentCultureIgnoreCase))
                                     {
-                                        Console.WriteLine(coffeeSearch.Name);
+                                        //Console.WriteLine(coffeeSearch.Name);
+                                        selectedName = coffeeSearch.Name;
+                                        drinkPrice = coffeeSearch.Price;
                                     }
                                 }
                                 Console.WriteLine();
                                 goodAns = true;
+                                
                             }
                             else 
                             {
@@ -159,7 +164,7 @@ namespace MidTerm2023
                     }
                     bool userDrinks = int.TryParse(Console.ReadLine(), out quantity);
                     //int myQuantity = quantity;
-                    //cart.Add(new Cart(selectedName, drinkPrice, quantity));
+                    cart.Add(new Cart(selectedName, drinkPrice, quantity));
 
                     // Get the user's add-on selections
                     if (quantity == 1)
