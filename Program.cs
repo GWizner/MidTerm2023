@@ -333,7 +333,7 @@ namespace MidTerm2023
                                     Console.WriteLine("Please enter the name or item number of the item you would like to remove: ");
                                     userInputA = Console.ReadLine().ToLower();
                                     browse = int.TryParse(userInputA, out itemNo);
-                                    bool itemRemoved = myCart.CurrentCart(cart, drinkPrice, userInputA, itemNo, quantity,browse);
+                                    bool itemRemoved = myCart.CurrentCart(cart, drinkPrice, drinkTotal, userInputA, itemNo, quantity, browse);
                                     if (!itemRemoved)
                                     {
                                         Console.WriteLine("\nThat item is not in your cart.\n");

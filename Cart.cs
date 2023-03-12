@@ -22,7 +22,7 @@ namespace MidTerm2023
             AddOnName = addOnName;
             AddOnPrice = addOnPrice;
 
-            
+
         }
         public void UpdateQuantity(int quantity)
         {
@@ -38,7 +38,7 @@ namespace MidTerm2023
             decimal subtotal = drinkTotal + addOnTotal;
             decimal salesTax = subtotal * 0.06m;
             totalPrice = subtotal + salesTax;
-            
+
 
             for (int i = 0; i < cart.Count; i++)
             {
@@ -60,7 +60,7 @@ namespace MidTerm2023
             Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", totalPrice);
             Console.ResetColor();
         }
-        public bool CurrentCart(List<Cart> cart, decimal drinkTotal, string userInputA, int itemNo, int quantity, bool browse)
+        public bool CurrentCart(List<Cart> cart, decimal drinkPrice, decimal drinkTotal, string userInputA, int itemNo, int quantity, bool browse)
         {
             if (browse)
             {
