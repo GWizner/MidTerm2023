@@ -14,6 +14,8 @@ namespace MidTerm2023
             string userInputA = null;
             string name = null;
             string description = null;
+            string selectedName = null;
+
             //string selectedAddOn = null;
 
 
@@ -40,9 +42,9 @@ namespace MidTerm2023
             bool cashOut = false;
             bool browse = true;
             bool keepAsk = true;
-
+            bool viewMenu = true;
+            bool noMenu = true;
             
-            CoffeeMenu selectedName = null;
             CoffeeMenu menu = new CoffeeMenu(id, name, description, price);
             ViewCart myCart = new ViewCart();
             List<Cart> cart = new List<Cart>();
@@ -72,15 +74,9 @@ namespace MidTerm2023
             {
 
                 bool goodAns = false;
-                selectedName = coffees.FirstOrDefault(x => x.Name.Equals(userDrink, StringComparison.OrdinalIgnoreCase));
-
-
-                Console.WriteLine("Would you like to see our drink menu (y/n)? ");
-                string userChoice1 = Console.ReadLine();
-                if (userChoice1 == "yes" || userChoice1 == "y")
+                
+                while (viewMenu)
                 {
-                    Console.WriteLine();
-                    //menu.DisplayDrinks(coffees);
                     int counter = 1;
                     foreach (CoffeeMenu coffee in coffees)
                     {
@@ -89,7 +85,7 @@ namespace MidTerm2023
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Write("{0, -1}{1, -20}", coffee.Id + ". ", coffee.Name);
                             Console.Write("{0, -30}", "\x1b[38;5;94m" + coffee.Description);
-                            Console.WriteLine("{0, 10:C}", "\x1b[31m" + coffee.Price + "\x1b[0m"); 
+                            Console.WriteLine("{0, 10:C}", "\x1b[31m" + coffee.Price + "\x1b[0m");
                         }
                         else
                         {
@@ -103,195 +99,217 @@ namespace MidTerm2023
                         //    "\x1b[38;5;94m" + coffee.Description + "\x1b[31m", "", coffee.Price + "\x1b[0m");
                     }
 
-                    while (!goodAns)
+                    while (noMenu)
                     {
-                        Console.Write("\nEnter the name of your coffee drink: ");
-                        userDrink = Console.ReadLine().ToLower();
-                        goodDrink = int.TryParse(userDrink, out drinkNum);
-                        
-                        if (goodDrink)
+                        while (!goodAns)
                         {
-                            if (drinkNum < 1 || drinkNum > 13)
+                            Console.Write("\nEnter the name of your coffee drink: ");
+                            userDrink = Console.ReadLine().ToLower();
+                            goodDrink = int.TryParse(userDrink, out drinkNum);
+                            //selectedName = coffees.FirstOrDefault(x => x.Name.Equals(userDrink, StringComparison.OrdinalIgnoreCase));
+
+
+                            if (goodDrink)
                             {
-                                Console.WriteLine("We do not have a drink with that number. Please try again.\n");
-                                goodAns = false;
-                            }
-                            else if (drinkNum >= 1 && drinkNum < 14)
-                            {
-                                Console.WriteLine($"\n {coffees[drinkNum - 1].Name} \n");
-                            }
-                        }
-                        else if (!goodAns)
-                        {
-                            if (coffees.Any(x => x.Name.Contains(userDrink, StringComparison.CurrentCultureIgnoreCase)))
-                            {
-                                foreach (CoffeeMenu coffeeSearch in coffees)
+                                if (drinkNum < 1 || drinkNum > 13)
                                 {
-                                    if (coffeeSearch.Name.Contains(userDrink, StringComparison.CurrentCultureIgnoreCase))
+                                    Console.WriteLine("We do not have a drink with that number. Please try again.\n");
+                                }
+                                else if (drinkNum >= 1 && drinkNum <= 13)
+                                {
+                                    selectedName = coffees[drinkNum - 1].Name;
+                                    goodAns = true;
+                                }
+                            }
+                            else if (!goodDrink)
+                            {
+                                if (coffees.Any(x => x.Name.Equals(userDrink, StringComparison.CurrentCultureIgnoreCase)))
+                                {
+                                    foreach (CoffeeMenu coffeeSearch in coffees)
                                     {
-                                        Console.WriteLine(coffeeSearch.Name);
+                                        if (coffeeSearch.Name.Equals(userDrink, StringComparison.CurrentCultureIgnoreCase))
+                                        {
+                                            selectedName = coffeeSearch.Name;
+                                            goodAns = true;
+                                        }
                                     }
                                 }
-                                Console.WriteLine();
-                                goodAns = true;
+                                else
+                                {
+                                    Console.WriteLine("I do not understand your input. Please try again.\n");
+                                }
                             }
-                            else 
-                            {
-                                Console.WriteLine("I do not understand your input. Please try again.\n");
-                            }
-                        } 
-                    }
+                        }
 
-                    foreach (CoffeeMenu coffee in coffees)
-                    {
-                        if (coffee.Name.EndsWith('s'))
+
+                        if (selectedName.EndsWith('s'))
                         {
                             endsWithS = true;
-                        } 
-                    }
-                    if (endsWithS)
-                    {
-                        Console.Write($"\nHow many {selectedName}es would you like? ");
-                    }
-                    else
-                    {
-                        Console.Write($"\nHow many {selectedName}s would you like? ");
-                    }
-                    bool userDrinks = int.TryParse(Console.ReadLine(), out quantity);
-                    //int myQuantity = quantity;
-                    //cart.Add(new Cart(selectedName, drinkPrice, quantity));
-
-                    // Get the user's add-on selections
-                    if (quantity == 1)
-                    {
-                        Console.WriteLine($"\nOkay {quantity} {selectedName} ");
-                    }
-                    else if (endsWithS)
-                    {
-                        Console.Write($"\nOkay {quantity} {selectedName}es ");
-                    }
-                    else
-                    {
-                        Console.Write($"\nOkay {quantity} {selectedName}s ");
-                    }
-                    Console.Write("would you like any add-ons (y/n)? ");
-                    string userChoice2 = Console.ReadLine().ToLower();
-                    Console.WriteLine();
-
-                    if (userChoice2 == "yes" || userChoice2 == "y")
-                    {
-                        menu.DisplayAddOns();
-                        Console.Write("\nEnter add-on selection(s) (please seperate choices by a comma): ");
-                        addOnName = Console.ReadLine();
-                    }
-
-                    foreach (CoffeeMenu drink in coffees)
-                    {
-                        if (drink.Name.Equals(drinkName, StringComparison.OrdinalIgnoreCase))
-                        {
-                            Cart? existingItem = cart.FirstOrDefault(item => item.DrinkName == drinkName && item.DrinkPrice == drinkPrice);
-                            if (existingItem != null)
-                            {
-                                existingItem.UpdateQuantity(quantity);
-                            }
-                            else
-                            {
-                                cart.Add(new Cart(drinkName, drinkPrice, quantity));
-                            }
-                            break;
                         }
-                        else if (drink.Id == drinkNum)
+
+                        if (endsWithS)
                         {
-                            //drinkTotal += drinkPrice;
-                            if (quantity == 1)
+                            Console.Write($"\nHow many {selectedName}es would you like? ");
+                        }
+                        else
+                        {
+                            Console.Write($"\nHow many {selectedName}s would you like? ");
+                        }
+                        bool userDrinks = int.TryParse(Console.ReadLine(), out quantity);
+                        //int myQuantity = quantity;
+                        //cart.Add(new Cart(selectedName, drinkPrice, quantity));
+
+                        // Get the user's add-on selections
+                        if (quantity == 1)
+                        {
+                            Console.WriteLine($"\nOkay {quantity} {selectedName} ");
+                        }
+                        else if (endsWithS)
+                        {
+                            Console.Write($"\nOkay {quantity} {selectedName}es ");
+                        }
+                        else
+                        {
+                            Console.Write($"\nOkay {quantity} {selectedName}s ");
+                        }
+                        Console.Write("would you like any add-ons (y/n)? ");
+                        string userChoice2 = Console.ReadLine().ToLower();
+                        Console.WriteLine();
+
+                        if (userChoice2 == "yes" || userChoice2 == "y")
+                        {
+                            menu.DisplayAddOns();
+                            Console.Write("\nEnter add-on selection(s) (please seperate choices by a comma): ");
+                            addOnName = Console.ReadLine();
+                        }
+
+                        foreach (CoffeeMenu drink in coffees)
+                        {
+                            if (drink.Name.Equals(drinkName, StringComparison.OrdinalIgnoreCase))
                             {
-                                cart.Add(new Cart(drinkName, drinkPrice, quantity));
-                            }
-                            else
-                            {
-                                for (int i = 0; i < quantity; i++)
+                                Cart? existingItem = cart.FirstOrDefault(item => item.DrinkName == drinkName && item.DrinkPrice == drinkPrice);
+                                if (existingItem != null)
+                                {
+                                    existingItem.UpdateQuantity(quantity);
+                                }
+                                else
                                 {
                                     cart.Add(new Cart(drinkName, drinkPrice, quantity));
                                 }
-                                //cart.Add(new Cart(quantity: myQuantity));
+                                break;
                             }
-                            //drinkTotal = drinkTotal + menu.drinks[selectedName];
-                            break;
-                        }
-                    }
-
-                    if (addOnName != null)
-                    {
-                        string[] addOnChoices = addOnName.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                        foreach (string currAddOn in addOnChoices)
-                        {
-                            foreach (KeyValuePair<string, decimal> addOn in menu.addOns)
+                            else if (drink.Id == drinkNum)
                             {
-                                if (string.Equals(currAddOn.Trim(), addOn.Key, StringComparison.OrdinalIgnoreCase))
+                                //drinkTotal += drinkPrice;
+                                if (quantity == 1)
                                 {
-                                    cart.Add(new Cart(quantity: 1, addOnName: addOn.Key, addOnPrice: addOn.Value));
-                                    break;
+                                    cart.Add(new Cart(drinkName, drinkPrice, quantity));
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < quantity; i++)
+                                    {
+                                        cart.Add(new Cart(drinkName, drinkPrice, quantity));
+                                    }
+                                    //cart.Add(new Cart(quantity: myQuantity));
+                                }
+                                //drinkTotal = drinkTotal + menu.drinks[selectedName];
+                                break;
+                            }
+                        }
+
+                        if (addOnName != null)
+                        {
+                            string[] addOnChoices = addOnName.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                            foreach (string currAddOn in addOnChoices)
+                            {
+                                foreach (KeyValuePair<string, decimal> addOn in menu.addOns)
+                                {
+                                    if (string.Equals(currAddOn.Trim(), addOn.Key, StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        cart.Add(new Cart(quantity: 1, addOnName: addOn.Key, addOnPrice: addOn.Value));
+                                        break;
+                                    }
+                                }
+                                //foreach (string addOn in addOnChoices)
+                                //{
+                                //    selectedAddOn = menu.addOns.Keys.FirstOrDefault(x => x.Equals(addOn, StringComparison.OrdinalIgnoreCase));
+                                //    decimal addOnChoicePrice = menu.GetAddOnPrice(selectedAddOn);
+                                //    addOnPrice += addOnChoicePrice;
+                                //    cart.Add(new Cart(addOn, addOnPrice));
+                                //}
+                            }
+                        }
+
+                        for (int i = 0; i < cart.Count; i++)
+                        {
+                            addOnTotal += cart[i].AddOnPrice;
+                        }
+                        drinkTotal = drinkPrice * quantity;
+                        subtotal = drinkTotal + addOnTotal;
+                        salesTax = subtotal * 0.06m;
+                        totalPrice = subtotal + salesTax;
+
+                        while (browse)
+                        {
+                            //myCart.PrintCart(cart, drinkTotal, addOnPrice, totalPrice);
+                            int i = 0;
+                            HashSet<string> drinkNames = new HashSet<string>();
+                            //while (i < cart.Count)
+                            //{
+                            for (i = 0; i < cart.Count; i++)
+                            {
+                                string thisDrinkName = cart[i].DrinkName;
+                                //decimal thisDrinkPrice = cart[i].DrinkPrice;
+                                int thisDrinkQuantity = cart[i].DrinkQuantity;
+                                //Thread.Sleep(500);
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                if (!drinkNames.Contains(thisDrinkName))
+                                {
+                                    Console.Write("{0,-15}", thisDrinkName);
+                                    Console.Write("\x1b[38;5;80m" + "{0}", thisDrinkQuantity);
+                                    Console.WriteLine("\x1b[31m" + "{0,16:C}", drinkTotal);
+                                    drinkNames.Add(thisDrinkName);
+                                    //break;
+                                }
+
+                                if (cart[i].AddOnName != null)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("{0,-15}", cart[i].AddOnName);
+                                    Console.Write("{0}", 1);
+                                    Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].AddOnPrice);
+                                    Console.ResetColor();
                                 }
                             }
-                            //foreach (string addOn in addOnChoices)
-                            //{
-                            //    selectedAddOn = menu.addOns.Keys.FirstOrDefault(x => x.Equals(addOn, StringComparison.OrdinalIgnoreCase));
-                            //    decimal addOnChoicePrice = menu.GetAddOnPrice(selectedAddOn);
-                            //    addOnPrice += addOnChoicePrice;
-                            //    cart.Add(new Cart(addOn, addOnPrice));
                             //}
-                        }
-                    }
-                }
-                for (int i = 0; i < cart.Count; i++)
-                {
-                    addOnTotal += cart[i].AddOnPrice;
-                }
-                drinkTotal = drinkPrice * quantity;
-                subtotal = drinkTotal + addOnTotal;
-                salesTax = subtotal * 0.06m;
-                totalPrice = subtotal + salesTax;
-
-                while (browse)
-                {
-                    //myCart.PrintCart(cart, drinkTotal, addOnPrice, totalPrice);
-                    int i = 0;
-                    HashSet<string> drinkNames = new HashSet<string>();
-                    //while (i < cart.Count)
-                    //{
-                    for (i = 0; i < cart.Count; i++)
-                    {
-                        string thisDrinkName = cart[i].DrinkName;
-                        //decimal thisDrinkPrice = cart[i].DrinkPrice;
-                        int thisDrinkQuantity = cart[i].DrinkQuantity;
-                        //Thread.Sleep(500);
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        if (!drinkNames.Contains(thisDrinkName))
-                        {
-                            Console.Write("{0,-15}", thisDrinkName);
-                            Console.Write("\x1b[38;5;80m" + "{0}", thisDrinkQuantity);
-                            Console.WriteLine("\x1b[31m" + "{0,16:C}", drinkTotal);
-                            drinkNames.Add(thisDrinkName);
-                            //break;
-                        }
-
-                        if (cart[i].AddOnName != null)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write("{0,-15}", cart[i].AddOnName);
-                            Console.Write("{0}", 1);
-                            Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].AddOnPrice);
+                            Thread.Sleep(800);
+                            Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
+                            Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
+                            Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Sales Tax:" + "\x1b[31m", salesTax);
+                            Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", totalPrice);
                             Console.ResetColor();
-                        }
-                    }
-                    //}
-                    Thread.Sleep(800);
-                    Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
-                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
-                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Sales Tax:" + "\x1b[31m", salesTax);
-                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", totalPrice);
-                    Console.ResetColor();
 
+                        }
+                        Console.WriteLine("Would you like to purchse another beverage?");
+                        string purchase = Console.ReadLine();
+                        if (purchase == "yes" || purchase == "y")
+                        {
+
+                        }
+                        else if (purchase == "no" || purchase == "n")
+                        { }
+                        else
+                            Console.WriteLine("I do not understand your input. Please try again.\n");
+                        Console.WriteLine("Would you like to see our drink menu (y/n)? ");
+                        string userChoice1 = Console.ReadLine();
+                        if (userChoice1 == "yes" || userChoice1 == "y")
+                        { }
+                        else if (userChoice1 == "no" || userChoice1 == "n")
+                        { }
+                        else
+                            Console.WriteLine("I do not understand your input. Please try again.\n");
+                    }
                     if (!cashOut)
                     {
                         Console.WriteLine("\nWould you like to remove any items from your cart (y/n)?\n");
