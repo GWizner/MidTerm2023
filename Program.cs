@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Channels;
 
 namespace MidTerm2023
@@ -106,8 +107,6 @@ namespace MidTerm2023
                             Console.Write("\nEnter the name of your coffee drink: ");
                             userDrink = Console.ReadLine().ToLower();
                             goodDrink = int.TryParse(userDrink, out drinkNum);
-                            //selectedName = coffees.FirstOrDefault(x => x.Name.Equals(userDrink, StringComparison.OrdinalIgnoreCase));
-
 
                             if (goodDrink)
                             {
@@ -127,17 +126,18 @@ namespace MidTerm2023
                                 {
                                     foreach (CoffeeMenu coffeeSearch in coffees)
                                     {
-                                        if (coffeeSearch.Name.Equals(userDrink, StringComparison.CurrentCultureIgnoreCase))
-                                        {
-                                            selectedName = coffeeSearch.Name;
-                                            goodAns = true;
-                                        }
+                                        //Console.WriteLine(coffeeSearch.Name);
+                                        selectedName = coffeeSearch.Name;
+                                        drinkPrice = coffeeSearch.Price;
                                     }
                                 }
-                                else
-                                {
-                                    Console.WriteLine("I do not understand your input. Please try again.\n");
-                                }
+                                Console.WriteLine();
+                                goodAns = true;
+                                
+                            }
+                            else 
+                            {
+                                Console.WriteLine("I do not understand your input. Please try again.\n");
                             }
                         }
 
@@ -145,7 +145,6 @@ namespace MidTerm2023
                         if (selectedName.EndsWith('s'))
                         {
                             endsWithS = true;
-                        }
 
                         if (endsWithS)
                         {
