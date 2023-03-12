@@ -21,22 +21,22 @@ namespace MidTerm2023
             Price = price;
         }
 
-        List<CoffeeMenu> coffees = new List<CoffeeMenu>
-            {
-            new CoffeeMenu (1, "Espresso", "Strong.", 2.50m) ,
-            new CoffeeMenu (2, "Cappuccino", "Classic.", 3.50m),
-            new CoffeeMenu (3, "Latte", "Frothed milk.", 4.00m),
-            new CoffeeMenu (4, "Americano", "Hot.", 3.00m),
-            new CoffeeMenu (5, "Mocha", "Chocolate.", 4.50m),
-            new CoffeeMenu (6, "Macchiato", "Beverage.", 3.50m),
-            new CoffeeMenu (7, "Flat White", "Similar.", 4.50m),
-            new CoffeeMenu (8, "Irish Coffee", "Cocktail.", 6.00m),
-            new CoffeeMenu (9, "Affogato", "Vanilla.", 5.00m),
-            new CoffeeMenu (10, "French Press", "Coarse.", 6.50m),
-            new CoffeeMenu (11, "Cold Brew", "Cold.", 4.50m),
-            new CoffeeMenu (12, "Nitro Cold Brew", "Nitrogen.", 5.00m),
-            new CoffeeMenu (13, "Iced Coffee", "Iced.", 3.50m)
-        };
+        //List<CoffeeMenu> coffees = new List<CoffeeMenu>
+        //    {
+        //    new CoffeeMenu (1, "Espresso", "Strong.", 2.50m) ,
+        //    new CoffeeMenu (2, "Cappuccino", "Classic.", 3.50m),
+        //    new CoffeeMenu (3, "Latte", "Frothed milk.", 4.00m),
+        //    new CoffeeMenu (4, "Americano", "Hot.", 3.00m),
+        //    new CoffeeMenu (5, "Mocha", "Chocolate.", 4.50m),
+        //    new CoffeeMenu (6, "Macchiato", "Beverage.", 3.50m),
+        //    new CoffeeMenu (7, "Flat White", "Similar.", 4.50m),
+        //    new CoffeeMenu (8, "Irish Coffee", "Cocktail.", 6.00m),
+        //    new CoffeeMenu (9, "Affogato", "Vanilla.", 5.00m),
+        //    new CoffeeMenu (10, "French Press", "Coarse.", 6.50m),
+        //    new CoffeeMenu (11, "Cold Brew", "Cold.", 4.50m),
+        //    new CoffeeMenu (12, "Nitro Cold Brew", "Nitrogen.", 5.00m),
+        //    new CoffeeMenu (13, "Iced Coffee", "Iced.", 3.50m)
+        //};
 
 
 
