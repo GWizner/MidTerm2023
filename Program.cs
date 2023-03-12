@@ -43,12 +43,13 @@ namespace MidTerm2023
             CoffeeMenu selectedName = null;
             CoffeeMenu menu = new CoffeeMenu(id, name, description, price);
             ViewCart myCart = new ViewCart();
-
             List<Cart> cart = new List<Cart>();
             List<CoffeeMenu> coffees = new List<CoffeeMenu>();
             
 
             Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
+
+
 
             while (keepAsk)
             {

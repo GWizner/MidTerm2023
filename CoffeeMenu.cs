@@ -38,7 +38,53 @@ namespace MidTerm2023
             new CoffeeMenu (13, "Iced Coffee", "Iced.", 3.50m)
         };
 
+        //public static void DisplayDrinks(string[] args)
+        //{
+        //    CoffeeMenu menu = new CoffeeMenu();
+        //    List<CoffeeMenu> coffees = menu.menuList;
 
+        //    Console.ForegroundColor = ConsoleColor.DarkCyan;
+        //    Console.WriteLine("DRINKS MENU:");
+        //    Console.ResetColor();
+
+
+        //    foreach (var drink in coffees)
+        //    {
+        //        Console.ForegroundColor = ConsoleColor.Green;
+        //        Console.Write(String.Format("{0, -1}{1, -17}", counter + ".", drink.Id));
+        //        if (counter > 9)
+        //        {
+        //            Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Name));
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine(String.Format("\x1b[31m" + "{0, 11:C}", drink.Name));
+        //        }
+        //        Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Price));
+        //        Console.ResetColor();
+        //    }
+        //}
+
+            int counter = 1;
+            foreach (var drink in coffees)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(String.Format("{0, -1}", drink.Id + "."));
+                if (counter > 9)
+                {
+                    Console.Write(String.Format("\x1b[31m" + "{0, 10:C}", drink.Name));
+                }
+                else
+                {
+                    Console.Write(String.Format("\x1b[31m" + "{0, 11:C}", drink.Name));
+                }
+                Console.Write(String.Format("\x1b[31m" + "{0, 10:C}", drink.Price));
+                Console.Write(String.Format("\x1b[31m" + "{0, 10:C}", drink.Description));
+                Console.WriteLine(" ");
+                Console.ResetColor();
+                counter++;
+            }
+        }
 
         //public Dictionary<string, decimal> drinks;
 
@@ -55,49 +101,6 @@ namespace MidTerm2023
             { "Shot of Vodka", 6.00m },
             { "Shot of Bourbon", 6.00m }
             };
-
-        //public Dictionary<int, string> drinkMenu;
-
-        //public CoffeeMenu(string drinkName, int drinkNum)
-        //{
-        //    drinks = new Dictionary<string, decimal>
-        //    {
-        //    { "Espresso", 3.00m },
-        //    { "Cappuccino", 4.50m },
-        //    { "Latte", 4.00m },
-        //    { "Americano", 3.50m },
-        //    { "Mocha", 5.00m },
-        //    { "Macchiato", 4.50m },
-        //    { "Flat White", 4.50m },
-        //    { "Irish Coffee", 6.50m },
-        //    { "Affogato", 5.00m },
-        //    { "French Press", 5.50m },
-        //    { "Cold Brew", 4.50m },
-        //    { "Nitro Cold Brew", 5.50m },
-        //    { "Iced Coffee", 3.50m }
-        //    };
-
-        //    drinkMenu = new Dictionary<int, string>
-        //    {
-        //        { 1, "Espresso"},
-        //        { 2, "Cappuccino"},
-        //        { 3, "Latte"},
-        //        { 4, "Americano"},
-        //        { 5, "Mocha"},
-        //        { 6, "Macchiato"},
-        //        { 7, "Flat White"},
-        //        { 8, "Irish Coffee"},
-        //        { 9, "Affogato"},
-        //        { 10, "French Press"},
-        //        { 11, "Cold Brew"},
-        //        { 12, "Nitro Cold Brew"},
-        //        { 13, "Iced Coffee"}
-        //    };
-        //    drinkNum = drinkMenu.FirstOrDefault(x => x.Value == drinkName).Key - 1;
-
-
-
-
 
         ////public void DisplayDrinks()
         ////{
