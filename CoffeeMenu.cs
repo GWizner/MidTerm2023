@@ -10,8 +10,8 @@ namespace MidTerm2023
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
 
         public CoffeeMenu(int id, string name, string description, decimal price)
         {
@@ -19,10 +19,9 @@ namespace MidTerm2023
             Name = name;
             Description = description;
             Price = price;
-
         }
 
-        public List<CoffeeMenu> coffees = new List<CoffeeMenu>
+        List<CoffeeMenu> coffees = new List<CoffeeMenu>
             {
             new CoffeeMenu (1, "Espresso", "Strong.", 2.50m) ,
             new CoffeeMenu (2, "Cappuccino", "Classic.", 3.50m),
@@ -66,13 +65,6 @@ namespace MidTerm2023
         //    }
         //}
 
-
-        public void DisplayDrinks(List<CoffeeMenu> coffees)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("DRINKS MENU:");
-            Console.ResetColor();
-
             int counter = 1;
             foreach (var drink in coffees)
             {
@@ -96,50 +88,8 @@ namespace MidTerm2023
 
         //public Dictionary<string, decimal> drinks;
 
-        //public Dictionary<string, decimal> addOns;
-
-        //public Dictionary<int, string> drinkMenu;
-
-        //public CoffeeMenu(string drinkName, int drinkNum)
-        //{
-        //    drinks = new Dictionary<string, decimal>
-        //    {
-        //    { "Espresso", 3.00m},
-        //    { "Cappuccino", 4.50m },
-        //    { "Latte", 4.00m },
-        //    { "Americano", 3.50m },
-        //    { "Mocha", 5.00m },
-        //    { "Macchiato", 4.50m },
-        //    { "Flat White", 4.50m },
-        //    { "Irish Coffee", 6.50m },
-        //    { "Affogato", 5.00m },
-        //    { "French Press", 5.50m },
-        //    { "Cold Brew", 4.50m },
-        //    { "Nitro Cold Brew", 5.50m },
-        //    { "Iced Coffee", 3.50m }
-        //    };
-
-        //    drinkMenu = new Dictionary<int, string>
-        //    {
-        //        { 1, "Espresso"},
-        //        { 2, "Cappuccino"},
-        //        { 3, "Latte"},
-        //        { 4, "Americano"},
-        //        { 5, "Mocha"},
-        //        { 6, "Macchiato"},
-        //        { 7, "Flat White"},
-        //        { 8, "Irish Coffee"},
-        //        { 9, "Affogato"},
-        //        { 10, "French Press"},
-        //        { 11, "Cold Brew"},
-        //        { 12, "Nitro Cold Brew"},
-        //        { 13, "Iced Coffee"}
-        //    };
-        //    drinkNum = drinkMenu.FirstOrDefault(x => x.Value == drinkName).Key - 1;
-
-
-        Dictionary<string, decimal> addOns = new Dictionary<string, decimal>
-        {
+        public Dictionary<string, decimal> addOns = new Dictionary<string, decimal>
+            {
             { "Milk", 0.25m },
             { "Whipped Cream", 0.50m },
             { "Caramel", 0.50m },
@@ -150,7 +100,31 @@ namespace MidTerm2023
             { "Shot of Baileys", 5.00m },
             { "Shot of Vodka", 6.00m },
             { "Shot of Bourbon", 6.00m }
-        };
+            };
+
+        ////public void DisplayDrinks()
+        ////{
+        ////    Console.ForegroundColor = ConsoleColor.DarkCyan;
+        ////    Console.WriteLine("DRINKS MENU:");
+        ////    Console.ResetColor();
+
+        ////    int counter = 1;
+        ////    foreach (var drink in drinks)
+        ////    {
+        ////        Console.ForegroundColor = ConsoleColor.Green;
+        ////        Console.Write(String.Format("{0, -1}{1, -17}", counter + ".", drink.Key));
+        ////        if (counter > 9)
+        ////        {
+        ////            Console.WriteLine(String.Format("\x1b[31m" + "{0, 10:C}", drink.Value)); 
+        ////        }
+        ////        else
+        ////        {
+        ////            Console.WriteLine(String.Format("\x1b[31m" + "{0, 11:C}", drink.Value));
+        ////        }
+        ////        Console.ResetColor();
+        ////        counter++;
+        ////    }
+        ////}
         //public void DisplayDrinks()
         //{
         //    Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -195,16 +169,19 @@ namespace MidTerm2023
         //    }
         //}
 
-        public decimal GetAddOnPrice(string selectedAddOn)
-        {
-            if (addOns.ContainsKey(selectedAddOn))
-            {
-                return addOns[selectedAddOn];
-            }
-            else
-            {
-                throw new ArgumentException($"Invalid add-on name: {selectedAddOn}");
-            }
-        }
+        //public decimal GetAddOnPrice(string selectedAddOn)
+        //{
+        //    if (addOns.ContainsKey(selectedAddOn))
+        //    {
+        //        return addOns[selectedAddOn];
+        //    }
+        //    else
+        //    {
+        //        throw new ArgumentException($"Invalid add-on name: {selectedAddOn}");
+        //    }
+        //}
     }
 }
+
+
+

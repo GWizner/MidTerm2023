@@ -24,6 +24,10 @@ namespace MidTerm2023
 
             
         }
+        public void UpdateQuantity(int quantity)
+        {
+            DrinkQuantity += quantity;
+        }
     }
     public class ViewCart
     {
@@ -56,7 +60,7 @@ namespace MidTerm2023
             Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", totalPrice);
             Console.ResetColor();
         }
-        public bool CurrentCart(List<Cart> cart, decimal drinkTotal, string userInputA, int itemNo, bool browse)
+        public bool CurrentCart(List<Cart> cart, decimal drinkTotal, string userInputA, int itemNo, int quantity, bool browse)
         {
             if (browse)
             {
@@ -65,6 +69,7 @@ namespace MidTerm2023
                     if (i + 1 == itemNo)
                     {
                         drinkTotal -= cart[i].DrinkPrice;
+                        quantity -= 1;
                         cart.RemoveAt(i);
                         return true;
                     }
@@ -78,6 +83,7 @@ namespace MidTerm2023
                     if (cart[i].DrinkName.Equals(userInputA, StringComparison.CurrentCultureIgnoreCase))
                     {
                         drinkTotal -= cart[i].DrinkPrice;
+                        quantity -= 1;
                         cart.RemoveAt(i);
                         return true;
                     }
