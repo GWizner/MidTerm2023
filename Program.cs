@@ -74,7 +74,7 @@ namespace MidTerm2023
             while (keepAsk)
             {
 
-                bool goodAns = false;
+                
 
                 while (viewMenu)
                 {
@@ -99,9 +99,11 @@ namespace MidTerm2023
                         //Console.WriteLine("{0, -1}{1, -20}{2, -30}{3, 10:C}", coffee.Id + ". ", coffee.Name + 
                         //    "\x1b[38;5;94m" + coffee.Description + "\x1b[31m", "", coffee.Price + "\x1b[0m");
                     }
+                    noMenu = true;
 
                     while (noMenu)
                     {
+                        bool goodAns = false;
                         while (!goodAns)
                         {
                             Console.Write("\nEnter the name of your coffee drink: ");
@@ -271,12 +273,14 @@ namespace MidTerm2023
                                 }
                                 else if (purchase == "yes" || purchase == "y")
                                 {
+                                    
                                     while (true)
                                     {
                                         Console.WriteLine("Would you like to see our drink menu (y/n)? ");
                                         string userChoice1 = Console.ReadLine();
                                         if (userChoice1 == "yes" || userChoice1 == "y")
                                         {
+                                            noMenu = false;
                                             break;
                                         }
                                         else if (userChoice1 == "no" || userChoice1 == "n")
@@ -296,6 +300,7 @@ namespace MidTerm2023
                                     Console.WriteLine("I do not understand your input. Please try again.\n");
                                 }
                             }
+                            break;
                         }
                     }
                 }
