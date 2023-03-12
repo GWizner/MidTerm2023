@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Metrics;
+using System.Threading.Channels;
 
 namespace MidTerm2023
 {
@@ -44,8 +46,23 @@ namespace MidTerm2023
             CoffeeMenu menu = new CoffeeMenu(id, name, description, price);
             ViewCart myCart = new ViewCart();
             List<Cart> cart = new List<Cart>();
-            List<CoffeeMenu> coffees = new List<CoffeeMenu>();
-            
+            List<CoffeeMenu> coffees = new List<CoffeeMenu>()
+            {
+                new CoffeeMenu (1, "Espresso", "Strong.", 2.50m) ,
+                new CoffeeMenu (2, "Cappuccino", "Classic.", 3.50m),
+                new CoffeeMenu (3, "Latte", "Frothed milk.", 4.00m),
+                new CoffeeMenu (4, "Americano", "Hot.", 3.00m),
+                new CoffeeMenu (5, "Mocha", "Chocolate.", 4.50m),
+                new CoffeeMenu (6, "Macchiato", "Beverage.", 3.50m),
+                new CoffeeMenu (7, "Flat White", "Similar.", 4.50m),
+                new CoffeeMenu (8, "Irish Coffee", "Cocktail.", 6.00m),
+                new CoffeeMenu (9, "Affogato", "Vanilla.", 5.00m),
+                new CoffeeMenu (10, "French Press", "Coarse.", 6.50m),
+                new CoffeeMenu (11, "Cold Brew", "Cold.", 4.50m),
+                new CoffeeMenu (12, "Nitro Cold Brew", "Nitrogen.", 5.00m),
+                new CoffeeMenu (13, "Iced Coffee", "Iced.", 3.50m)
+            };
+
 
             Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
 
@@ -64,7 +81,27 @@ namespace MidTerm2023
                 {
                     Console.WriteLine();
                     //menu.DisplayDrinks(coffees);
-
+                    int counter = 1;
+                    foreach (CoffeeMenu coffee in coffees)
+                    {
+                        if (counter > 9)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("{0, -1}{1, -20}", coffee.Id + ". ", coffee.Name);
+                            Console.Write("{0, -30}", "\x1b[38;5;94m" + coffee.Description);
+                            Console.WriteLine("{0, 10:C}", "\x1b[31m" + coffee.Price + "\x1b[0m"); 
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("{0, -1}{1, -21}", coffee.Id + ". ", coffee.Name);
+                            Console.Write("{0, -30}", "\x1b[38;5;94m" + coffee.Description);
+                            Console.WriteLine("{0, 10:C}", "\x1b[31m" + coffee.Price + "\x1b[0m");
+                        }
+                        counter++;
+                        //Console.WriteLine("{0, -1}{1, -20}{2, -30}{3, 10:C}", coffee.Id + ". ", coffee.Name + 
+                        //    "\x1b[38;5;94m" + coffee.Description + "\x1b[31m", "", coffee.Price + "\x1b[0m");
+                    }
 
                     while (!goodAns)
                     {
