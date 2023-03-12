@@ -126,9 +126,13 @@ namespace MidTerm2023
                                 {
                                     foreach (CoffeeMenu coffeeSearch in coffees)
                                     {
-                                        //Console.WriteLine(coffeeSearch.Name);
-                                        selectedName = coffeeSearch.Name;
-                                        drinkPrice = coffeeSearch.Price;
+                                        if (coffeeSearch.Name.Equals(userDrink, StringComparison.CurrentCultureIgnoreCase))
+                                        {
+                                            //Console.WriteLine(coffeeSearch.Name);
+                                            selectedName = coffeeSearch.Name;
+                                            drinkPrice = coffeeSearch.Price;
+                                        }
+                                            
                                     }
                                 }
                                 Console.WriteLine();
@@ -145,7 +149,7 @@ namespace MidTerm2023
                         if (selectedName.EndsWith('s'))
                         {
                             endsWithS = true;
-
+                        }
                         if (endsWithS)
                         {
                             Console.Write($"\nHow many {selectedName}es would you like? ");
@@ -216,6 +220,7 @@ namespace MidTerm2023
                                 break;
                             }
                         }
+
 
                         if (addOnName != null)
                         {
