@@ -44,7 +44,7 @@ namespace MidTerm2023
             bool keepAsk = true;
             bool viewMenu = true;
             bool noMenu = true;
-            
+
             CoffeeMenu menu = new CoffeeMenu(id, name, description, price);
             ViewCart myCart = new ViewCart();
             List<Cart> cart = new List<Cart>();
@@ -74,7 +74,7 @@ namespace MidTerm2023
             {
 
                 bool goodAns = false;
-                
+
                 while (viewMenu)
                 {
                     int counter = 1;
@@ -252,107 +252,90 @@ namespace MidTerm2023
 
                         while (browse)
                         {
-                            //myCart.PrintCart(cart, drinkTotal, addOnPrice, totalPrice);
-                            int i = 0;
-                            HashSet<string> drinkNames = new HashSet<string>();
-                            //while (i < cart.Count)
-                            //{
-                            for (i = 0; i < cart.Count; i++)
-                            {
-                                string thisDrinkName = cart[i].DrinkName;
-                                //decimal thisDrinkPrice = cart[i].DrinkPrice;
-                                int thisDrinkQuantity = cart[i].DrinkQuantity;
-                                //Thread.Sleep(500);
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                if (!drinkNames.Contains(thisDrinkName))
-                                {
-                                    Console.Write("{0,-15}", thisDrinkName);
-                                    Console.Write("\x1b[38;5;80m" + "{0}", thisDrinkQuantity);
-                                    Console.WriteLine("\x1b[31m" + "{0,16:C}", drinkTotal);
-                                    drinkNames.Add(thisDrinkName);
-                                    //break;
-                                }
+                            myCart.PrintCart(cart, drinkTotal, addOnPrice, totalPrice);
 
-                                if (cart[i].AddOnName != null)
+
+                            while (true)
+                            {
+                                Console.WriteLine("Would you like to purchse another beverage?");
+                                string purchase = Console.ReadLine();
+                                if (purchase == "no" || purchase == "n")
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("{0,-15}", cart[i].AddOnName);
-                                    Console.Write("{0}", 1);
-                                    Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].AddOnPrice);
-                                    Console.ResetColor();
+                                    viewMenu = false;
+                                    noMenu = false;
+                                    break;
+                                }
+                                else if (purchase == "yes" || purchase == "y")
+                                {
+                                    while (true)
+                                    {
+                                        Console.WriteLine("Would you like to see our drink menu (y/n)? ");
+                                        string userChoice1 = Console.ReadLine();
+                                        if (userChoice1 == "yes" || userChoice1 == "y")
+                                        {
+                                            break;
+                                        }
+                                        else if (userChoice1 == "no" || userChoice1 == "n")
+                                        {
+                                            viewMenu = false;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("I do not understand your input. Please try again.\n");
+                                        }
+                                    }
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("I do not understand your input. Please try again.\n");
                                 }
                             }
-                            //}
-                            Thread.Sleep(800);
-                            Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
-                            Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
-                            Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Sales Tax:" + "\x1b[31m", salesTax);
-                            Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", totalPrice);
-                            Console.ResetColor();
-
                         }
-                        Console.WriteLine("Would you like to purchse another beverage?");
-                        string purchase = Console.ReadLine();
-                        if (purchase == "yes" || purchase == "y")
-                        {
-
-                        }
-                        else if (purchase == "no" || purchase == "n")
-                        { }
-                        else
-                            Console.WriteLine("I do not understand your input. Please try again.\n");
-                        Console.WriteLine("Would you like to see our drink menu (y/n)? ");
-                        string userChoice1 = Console.ReadLine();
-                        if (userChoice1 == "yes" || userChoice1 == "y")
-                        { }
-                        else if (userChoice1 == "no" || userChoice1 == "n")
-                        { }
-                        else
-                            Console.WriteLine("I do not understand your input. Please try again.\n");
                     }
-                    if (!cashOut)
-                    {
-                        Console.WriteLine("\nWould you like to remove any items from your cart (y/n)?\n");
-                        string yesNo = Console.ReadLine();
+                }
+                if (!cashOut)
+                {
+                    Console.WriteLine("\nWould you like to remove any items from your cart (y/n)?\n");
+                    string yesNo = Console.ReadLine();
 
-                        if (Validator.GetYesNo(yesNo))
+                    if (Validator.GetYesNo(yesNo))
+                    {
+                        if (yesNo.ToLower() == "n")
                         {
-                            if (yesNo.ToLower() == "n")
+                            browse = false;
+                        }
+                        else
+                        {
+                            if (cart.Count == 0)
                             {
+                                Console.WriteLine("\nYour cart is currently empty.");
                                 browse = false;
                             }
                             else
                             {
-                                if (cart.Count == 0)
+                                Console.WriteLine("Please enter the name or item number of the item you would like to remove: ");
+                                userInputA = Console.ReadLine().ToLower();
+                                browse = int.TryParse(userInputA, out itemNo);
+                                bool itemRemoved = myCart.CurrentCart(cart, drinkPrice, userInputA, itemNo, quantity, browse);
+                                if (!itemRemoved)
                                 {
-                                    Console.WriteLine("\nYour cart is currently empty.");
-                                    browse = false;
+                                    Console.WriteLine("\nThat item is not in your cart.\n");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Please enter the name or item number of the item you would like to remove: ");
-                                    userInputA = Console.ReadLine().ToLower();
-                                    browse = int.TryParse(userInputA, out itemNo);
-                                    bool itemRemoved = myCart.CurrentCart(cart, drinkPrice, userInputA, itemNo, quantity,browse);
-                                    if (!itemRemoved)
-                                    {
-                                        Console.WriteLine("\nThat item is not in your cart.\n");
-                                    }
-                                    else
-                                    {
-                                        myCart.PrintCart(cart, drinkTotal, addOnPrice, totalPrice);
-                                    }
+                                    myCart.PrintCart(cart, drinkTotal, addOnPrice, totalPrice);
                                 }
                             }
                         }
-                        else
-                        {
-                            Console.WriteLine("\nSorry, didn't catch that.\n");
-                            browse = true;
-                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nSorry, didn't catch that.\n");
+                        browse = true;
                     }
                 }
-
                 keepAsk = Validator.getContinue();
             }
             Console.WriteLine("\nHow would you like to pay today?\n");
