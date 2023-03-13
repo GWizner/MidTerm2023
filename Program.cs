@@ -9,12 +9,12 @@ namespace MidTerm2023
         static void Main(string[] args)
         {
             string addOnName = null;
-            string drinkName = null;
+            //string drinkName = null;
             string userDrink = null;
             string userInputA = null;
             string name = null;
             string description = null;
-            string selectedName = null;
+            string drinkName = null;
 
             //string selectedAddOn = null;
 
@@ -30,11 +30,12 @@ namespace MidTerm2023
             decimal drinkPrice = 0m;
             decimal addOnPrice = 0m;
             decimal addOnTotal = 0m;
-            decimal drinkTotal = 0m;
             decimal subtotal = 0m;
             decimal salesTax = 0m;
-            decimal totalPrice = 0m;
-            decimal price = 0;
+            decimal grandTotal = 0m;
+            decimal price = 0m;
+            decimal drinkTotal = 0m;
+
 
             //bool badName = false;
             bool goodDrink = false;
@@ -66,6 +67,7 @@ namespace MidTerm2023
             };
 
 
+
             Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
 
 
@@ -73,8 +75,7 @@ namespace MidTerm2023
             while (keepAsk)
             {
 
-                bool goodAns = false;
-
+                
                 while (viewMenu)
                 {
                     int counter = 1;
@@ -98,9 +99,10 @@ namespace MidTerm2023
                         //Console.WriteLine("{0, -1}{1, -20}{2, -30}{3, 10:C}", coffee.Id + ". ", coffee.Name + 
                         //    "\x1b[38;5;94m" + coffee.Description + "\x1b[31m", "", coffee.Price + "\x1b[0m");
                     }
-
+                    noMenu = true;
                     while (noMenu)
                     {
+                        bool goodAns = false;
                         while (!goodAns)
                         {
                             Console.Write("\nEnter the name of your coffee drink: ");
@@ -117,7 +119,8 @@ namespace MidTerm2023
                                 }
                                 else if (drinkNum >= 1 && drinkNum <= 13)
                                 {
-                                    selectedName = coffees[drinkNum - 1].Name;
+                                    drinkName = coffees[drinkNum - 1].Name;
+                                    drinkPrice = coffees[drinkNum - 1].Price;
                                     goodAns = true;
                                 }
                             }
@@ -129,7 +132,8 @@ namespace MidTerm2023
                                     {
                                         if (coffeeSearch.Name.Equals(userDrink, StringComparison.CurrentCultureIgnoreCase))
                                         {
-                                            selectedName = coffeeSearch.Name;
+                                            drinkName = coffeeSearch.Name;
+                                            drinkPrice = coffeeSearch.Price;
                                             goodAns = true;
                                         }
                                     }
@@ -142,35 +146,46 @@ namespace MidTerm2023
                         }
 
 
-                        if (selectedName.EndsWith('s'))
+                        if (drinkName.EndsWith('s'))
                         {
                             endsWithS = true;
                         }
 
-                        if (endsWithS)
+                        while (true)
                         {
-                            Console.Write($"\nHow many {selectedName}es would you like? ");
-                        }
-                        else
-                        {
-                            Console.Write($"\nHow many {selectedName}s would you like? ");
-                        }
-                        bool userDrinks = int.TryParse(Console.ReadLine(), out quantity);
-                        //int myQuantity = quantity;
-                        //cart.Add(new Cart(selectedName, drinkPrice, quantity));
+                            if (endsWithS)
+                            {
+                                Console.Write($"\nHow many {drinkName}es would you like? ");
+                            }
+                            else
+                            {
+                                Console.Write($"\nHow many {drinkName}s would you like? ");
+                            }
+                            bool userDrinks = int.TryParse(Console.ReadLine(), out quantity);
+                            drinkTotal = drinkPrice * quantity;
 
-                        // Get the user's add-on selections
-                        if (quantity == 1)
-                        {
-                            Console.WriteLine($"\nOkay {quantity} {selectedName} ");
-                        }
-                        else if (endsWithS)
-                        {
-                            Console.Write($"\nOkay {quantity} {selectedName}es ");
-                        }
-                        else
-                        {
-                            Console.Write($"\nOkay {quantity} {selectedName}s ");
+                            if (!userDrinks || quantity == 0)
+                            {
+                                Console.WriteLine("Sorry, please enter an integer.");
+                            }
+                            else if (quantity == 1)
+                            {
+                                Console.WriteLine($"\nOkay {quantity} {drinkName} ");
+                                cart.Add(new Cart(drinkName, drinkPrice, drinkTotal, quantity));
+                                break;
+                            }
+                            else if (endsWithS)
+                            {
+                                Console.Write($"\nOkay {quantity} {drinkName}es ");
+                                cart.Add(new Cart(drinkName, drinkPrice, drinkTotal, quantity));
+                                break;
+                            }
+                            else
+                            {
+                                Console.Write($"\nOkay {quantity} {drinkName}s ");
+                                cart.Add(new Cart(drinkName, drinkPrice, drinkTotal, quantity));
+                                break;
+                            }
                         }
                         Console.Write("would you like any add-ons (y/n)? ");
                         string userChoice2 = Console.ReadLine().ToLower();
@@ -183,40 +198,42 @@ namespace MidTerm2023
                             addOnName = Console.ReadLine();
                         }
 
-                        foreach (CoffeeMenu drink in coffees)
-                        {
-                            if (drink.Name.Equals(drinkName, StringComparison.OrdinalIgnoreCase))
-                            {
-                                Cart? existingItem = cart.FirstOrDefault(item => item.DrinkName == drinkName && item.DrinkPrice == drinkPrice);
-                                if (existingItem != null)
-                                {
-                                    existingItem.UpdateQuantity(quantity);
-                                }
-                                else
-                                {
-                                    cart.Add(new Cart(drinkName, drinkPrice, quantity));
-                                }
-                                break;
-                            }
-                            else if (drink.Id == drinkNum)
-                            {
-                                //drinkTotal += drinkPrice;
-                                if (quantity == 1)
-                                {
-                                    cart.Add(new Cart(drinkName, drinkPrice, quantity));
-                                }
-                                else
-                                {
-                                    for (int i = 0; i < quantity; i++)
-                                    {
-                                        cart.Add(new Cart(drinkName, drinkPrice, quantity));
-                                    }
-                                    //cart.Add(new Cart(quantity: myQuantity));
-                                }
-                                //drinkTotal = drinkTotal + menu.drinks[selectedName];
-                                break;
-                            }
-                        }
+                        //foreach (CoffeeMenu drink in coffees)
+                        //{
+                        //    drinkName = drink.Name;
+                        //    drinkPrice = drink.Price;
+                        //    if (drink.Name.Equals(drinkName, StringComparison.OrdinalIgnoreCase))
+                        //    {
+                        //        Cart? existingItem = cart.FirstOrDefault(item => item.DrinkName == drinkName && item.DrinkPrice == drinkPrice);
+                        //        if (existingItem != null)
+                        //        {
+                        //            existingItem.UpdateQuantity(quantity);
+                        //        }
+                        //        else
+                        //        {
+                        //            cart.Add(new Cart(drinkName, drinkPrice, quantity));
+                        //        }
+                        //        break;
+                        //    }
+                        //    else if (drink.Id == drinkNum)
+                        //    {
+                        //        //drinkTotal += drinkPrice;
+                        //        if (quantity == 1)
+                        //        {
+                        //            cart.Add(new Cart(drinkName, drinkPrice, quantity));
+                        //        }
+                        //        else
+                        //        {
+                        //            for (int i = 0; i < quantity; i++)
+                        //            {
+                        //                cart.Add(new Cart(drinkName, drinkPrice, quantity));
+                        //            }
+                        //            //cart.Add(new Cart(quantity: myQuantity));
+                        //        }
+                        //        //drinkTotal = drinkTotal + menu.drinks[selectedName];
+                        //        break;
+                        //    }
+                        //}
 
                         if (addOnName != null)
                         {
@@ -245,19 +262,19 @@ namespace MidTerm2023
                         {
                             addOnTotal += cart[i].AddOnPrice;
                         }
-                        drinkTotal = drinkPrice * quantity;
-                        subtotal = drinkTotal + addOnTotal;
-                        salesTax = subtotal * 0.06m;
-                        totalPrice = subtotal + salesTax;
+                        //drinkTotal = drinkPrice * quantity;
+                        //subtotal = drinkTotal + addOnTotal;
+                        //salesTax = subtotal * 0.06m;
+                        //totalPrice = subtotal + salesTax;
 
                         while (browse)
                         {
-                            myCart.PrintCart(cart, drinkTotal, addOnPrice, totalPrice);
+                            myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
 
 
                             while (true)
                             {
-                                Console.WriteLine("Would you like to purchse another beverage?");
+                                Console.WriteLine("\nWould you like to purchse another beverage?");
                                 string purchase = Console.ReadLine();
                                 if (purchase == "no" || purchase == "n")
                                 {
@@ -269,10 +286,11 @@ namespace MidTerm2023
                                 {
                                     while (true)
                                     {
-                                        Console.WriteLine("Would you like to see our drink menu (y/n)? ");
+                                        Console.WriteLine("\nWould you like to see our drink menu (y/n)? ");
                                         string userChoice1 = Console.ReadLine();
                                         if (userChoice1 == "yes" || userChoice1 == "y")
                                         {
+                                            noMenu = false;
                                             break;
                                         }
                                         else if (userChoice1 == "no" || userChoice1 == "n")
@@ -282,16 +300,17 @@ namespace MidTerm2023
                                         }
                                         else
                                         {
-                                            Console.WriteLine("I do not understand your input. Please try again.\n");
+                                            Console.WriteLine("\nI do not understand your input. Please try again.\n");
                                         }
                                     }
                                     break;
                                 }
                                 else
                                 {
-                                    Console.WriteLine("I do not understand your input. Please try again.\n");
+                                    Console.WriteLine("\nI do not understand your input. Please try again.\n");
                                 }
                             }
+                            break;
                         }
                     }
                 }
@@ -325,7 +344,7 @@ namespace MidTerm2023
                                 }
                                 else
                                 {
-                                    myCart.PrintCart(cart, drinkTotal, addOnPrice, totalPrice);
+                                    myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
                                 }
                             }
                         }
@@ -349,11 +368,11 @@ namespace MidTerm2023
             {
                 Console.WriteLine("Enter the amount given by customer.");
                 decimal tender = decimal.Parse(Console.ReadLine());
-                decimal change = Payment.Cash(tender, totalPrice);
+                decimal change = Payment.Cash(tender, grandTotal);
                 Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
                 Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
                 Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Sales Tax:" + "\x1b[31m", salesTax);
-                Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", totalPrice);
+                Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", grandTotal);
                 Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Tender:" + "\x1b[31m", tender);
                 Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Change:" + "\x1b[31m", change);
             }
