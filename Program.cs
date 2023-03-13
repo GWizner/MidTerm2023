@@ -264,10 +264,7 @@ namespace MidTerm2023
                             }
                         }
 
-                        for (int i = 0; i < cart.Count; i++)
-                        {
-                            addOnTotal += cart[i].AddOnPrice;
-                        }
+                        
                         //drinkTotal = drinkPrice * quantity;
                         //subtotal = drinkTotal + addOnTotal;
                         //salesTax = subtotal * 0.06m;
