@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Channels;
 
 namespace MidTerm2023
@@ -75,7 +76,7 @@ namespace MidTerm2023
             while (keepAsk)
             {
 
-
+                
 
                 while (viewMenu)
                 {
@@ -136,14 +137,14 @@ namespace MidTerm2023
                                             drinkPrice = coffeeSearch.Price;
                                             goodAns = true;
                                         }
-
+                                            
                                     }
                                 }
                                 Console.WriteLine();
                                 goodAns = true;
-
+                                
                             }
-                            else
+                            else 
                             {
                                 Console.WriteLine("I do not understand your input. Please try again.\n");
                             }
@@ -263,7 +264,7 @@ namespace MidTerm2023
                             }
                         }
 
-
+                        
                         //drinkTotal = drinkPrice * quantity;
                         //subtotal = drinkTotal + addOnTotal;
                         //salesTax = subtotal * 0.06m;
@@ -286,7 +287,7 @@ namespace MidTerm2023
                                 }
                                 else if (purchase == "yes" || purchase == "y")
                                 {
-
+                                    
                                     while (true)
                                     {
                                         Console.WriteLine("\nWould you like to see our drink menu (y/n)? ");

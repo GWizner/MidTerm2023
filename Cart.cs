@@ -24,13 +24,13 @@ namespace MidTerm2023
 
             DrinkName = drinkName;
             DrinkPrice = drinkPrice;
-            DrinkTotal = drinkTotal;
+            DrinkTotal = drinkTotal; 
             DrinkQuantity = quantity;
             AddOnName = addOnName;
             AddOnPrice = addOnPrice;
+            
 
-
-
+            
         }
         //public void UpdateQuantity(int quantity)
         //{
@@ -74,14 +74,14 @@ namespace MidTerm2023
                     Console.Write("{0,-15}", cart[i].AddOnName);
                     Console.Write("{0}", 1);
                     Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].AddOnPrice);
-                    Console.ResetColor();
+                    Console.ResetColor();  
                 }
                 subtotal = totalPrice + addOnTotal;
                 salesTax = subtotal * 0.06m;
                 grandTotal = subtotal + salesTax;
                 GrandTotal = grandTotal;
             }
-
+            
             Thread.Sleep(800);
             Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
             Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
