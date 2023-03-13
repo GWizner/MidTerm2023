@@ -108,7 +108,7 @@ namespace MidTerm2023
                         bool goodAns = false;
                         while (!goodAns)
                         {
-                            Console.Write("\nEnter the name of your coffee drink: ");
+                            Console.Write("\nEnter the name or number of the coffee drink you'd like to order: ");
                             userDrink = Console.ReadLine().ToLower();
                             goodDrink = int.TryParse(userDrink, out drinkNum);
 
