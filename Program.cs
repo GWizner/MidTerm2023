@@ -349,6 +349,8 @@ namespace MidTerm2023
                                 else
                                 {
                                     myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
+                                    grandTotal = myCart.GrandTotal;
+
                                 }
                             }
                         }
@@ -360,6 +362,9 @@ namespace MidTerm2023
                     }
                 }
                 keepAsk = Validator.getContinue();
+                grandTotal = myCart.GrandTotal;
+                salesTax = myCart.SalesTax;
+                subtotal = myCart.SubTotal;
             }
             Console.WriteLine("\nHow would you like to pay today?\n");
             Console.WriteLine("1. Cash");

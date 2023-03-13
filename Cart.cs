@@ -40,12 +40,16 @@ namespace MidTerm2023
     public class ViewCart
     {
         public decimal GrandTotal { get; private set; }
+        public decimal SubTotal { get; private set; }
+        public decimal SalesTax { get; private set; }
         public void PrintCart(List<Cart> cart, decimal drinkTotal, decimal addOnTotal, decimal grandTotal)
         {
             GrandTotal = grandTotal;
             decimal totalPrice = 0m;
             decimal subtotal = drinkTotal + addOnTotal;
             decimal salesTax = subtotal * 0.06m;
+            SubTotal = subtotal;
+            SalesTax = salesTax;
             //grandTotal = totalPrice + salesTax;
 
 
@@ -53,7 +57,7 @@ namespace MidTerm2023
             {
                 totalPrice += cart[i].DrinkTotal;
                 addOnTotal += cart[i].AddOnPrice;
-                subtotal += cart[i].DrinkTotal;
+                //subtotal += cart[i].DrinkTotal;
 
                 if (cart[i].DrinkName != null)
                 {
@@ -75,6 +79,7 @@ namespace MidTerm2023
                 subtotal = totalPrice + addOnTotal;
                 salesTax = subtotal * 0.06m;
                 grandTotal = subtotal + salesTax;
+                GrandTotal = grandTotal;
             }
             
             Thread.Sleep(800);
