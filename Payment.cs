@@ -8,11 +8,10 @@ namespace MidTerm2023
 {
     public class Payment
     {
-        //decimal change = 0;
         public static decimal Cash(decimal tender, decimal orderTotal)
         {
             decimal change = 0;
-            return change = tender - orderTotal; // - orderTotal//
+            return change = tender - orderTotal;
         }
 
         public static string CreditCard(string ccnumber, string ccexp, string cccvv)

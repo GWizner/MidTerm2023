@@ -17,18 +17,12 @@ namespace MidTerm2023
 
 
                 string addOnName = null;
-                //string drinkName = null;
                 string userDrink = null;
                 string userInputA = null;
                 string name = null;
                 string description = null;
                 string drinkName = null;
 
-                //string selectedAddOn = null;
-
-
-                //string selectedNames = null;
-                //string selectedDrinkName = null;
 
                 int quantity = 0;
                 int drinkNum = 0;
@@ -44,8 +38,6 @@ namespace MidTerm2023
                 decimal price = 0m;
                 decimal drinkTotal = 0m;
 
-
-                //bool badName = false;
                 bool goodDrink = false;
                 bool endsWithS = false;
                 bool cashOut = false;
@@ -83,10 +75,6 @@ namespace MidTerm2023
 
                 Console.WriteLine("{0," + spaces + "}", textToCenter);
 
-                //Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
-
-
-
                 while (keepAsk)
                 {
 
@@ -112,8 +100,6 @@ namespace MidTerm2023
                                 Console.WriteLine("{0, 10:C}", "\x1b[31m" + "$" + coffee.Price + "\x1b[0m");
                             }
                             counter++;
-                            //Console.WriteLine("{0, -1}{1, -20}{2, -30}{3, 10:C}", coffee.Id + ". ", coffee.Name + 
-                            //    "\x1b[38;5;94m" + coffee.Description + "\x1b[31m", "", coffee.Price + "\x1b[0m");
                         }
                         noMenu = true;
 
@@ -217,44 +203,6 @@ namespace MidTerm2023
                                 addOnName = Console.ReadLine();
                             }
 
-                            //foreach (CoffeeMenu drink in coffees)
-                            //{
-                            //    drinkName = drink.Name;
-                            //    drinkPrice = drink.Price;
-                            //    if (drink.Name.Equals(drinkName, StringComparison.OrdinalIgnoreCase))
-                            //    {
-                            //        Cart? existingItem = cart.FirstOrDefault(item => item.DrinkName == drinkName && item.DrinkPrice == drinkPrice);
-                            //        if (existingItem != null)
-                            //        {
-                            //            existingItem.UpdateQuantity(quantity);
-                            //        }
-                            //        else
-                            //        {
-                            //            cart.Add(new Cart(drinkName, drinkPrice, quantity));
-                            //        }
-                            //        break;
-                            //    }
-                            //    else if (drink.Id == drinkNum)
-                            //    {
-                            //        //drinkTotal += drinkPrice;
-                            //        if (quantity == 1)
-                            //        {
-                            //            cart.Add(new Cart(drinkName, drinkPrice, quantity));
-                            //        }
-                            //        else
-                            //        {
-                            //            for (int i = 0; i < quantity; i++)
-                            //            {
-                            //                cart.Add(new Cart(drinkName, drinkPrice, quantity));
-                            //            }
-                            //            //cart.Add(new Cart(quantity: myQuantity));
-                            //        }
-                            //        //drinkTotal = drinkTotal + menu.drinks[selectedName];
-                            //        break;
-                            //    }
-                            //}
-
-
                             if (addOnName != null)
                             {
                                 string[] addOnChoices = addOnName.Split(',', StringSplitOptions.RemoveEmptyEntries);
@@ -268,21 +216,8 @@ namespace MidTerm2023
                                             break;
                                         }
                                     }
-                                    //foreach (string addOn in addOnChoices)
-                                    //{
-                                    //    selectedAddOn = menu.addOns.Keys.FirstOrDefault(x => x.Equals(addOn, StringComparison.OrdinalIgnoreCase));
-                                    //    decimal addOnChoicePrice = menu.GetAddOnPrice(selectedAddOn);
-                                    //    addOnPrice += addOnChoicePrice;
-                                    //    cart.Add(new Cart(addOn, addOnPrice));
-                                    //}
                                 }
                             }
-
-
-                            //drinkTotal = drinkPrice * quantity;
-                            //subtotal = drinkTotal + addOnTotal;
-                            //salesTax = subtotal * 0.06m;
-                            //totalPrice = subtotal + salesTax;
 
                             while (browse)
                             {
@@ -291,7 +226,7 @@ namespace MidTerm2023
 
                                 while (true)
                                 {
-                                    Console.WriteLine("\nWould you like to purchse another beverage?");
+                                    Console.WriteLine("\nWould you like to purchase another beverage?");
                                     string purchase = Console.ReadLine();
                                     if (purchase == "no" || purchase == "n")
                                     {
@@ -334,50 +269,6 @@ namespace MidTerm2023
                             }
                         }
                     }
-                    //if (!cashOut)
-                    //{
-                    //    Console.WriteLine("\nWould you like to remove any items from your cart (y/n)?\n");
-                    //    string yesNo = Console.ReadLine();
-
-                    //    if (Validator.GetYesNo(yesNo))
-                    //    {
-                    //        if (yesNo.ToLower() == "n")
-                    //        {
-                    //            browse = false;
-                    //        }
-                    //        else
-                    //        {
-                    //            if (cart.Count == 0)
-                    //            {
-                    //                Console.WriteLine("\nYour cart is currently empty.");
-                    //                browse = false;
-                    //            }
-                    //            else
-                    //            {
-                    //                Console.WriteLine("Please enter the name or item number of the item you would like to remove: ");
-                    //                userInputA = Console.ReadLine().ToLower();
-                    //                browse = int.TryParse(userInputA, out itemNo);
-                    //                bool itemRemoved = myCart.CurrentCart(cart, drinkPrice, userInputA, itemNo, quantity, browse);
-                    //                if (!itemRemoved)
-                    //                {
-                    //                    Console.WriteLine("\nThat item is not in your cart.\n");
-                    //                }
-                    //                else
-                    //                {
-                    //                    myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
-                    //                    grandTotal = myCart.GrandTotal;
-
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        Console.WriteLine("\nSorry, didn't catch that.\n");
-                    //        browse = true;
-                    //    }
-                    //}
-                    //keepAsk = Validator.getContinue();
                     grandTotal = myCart.GrandTotal;
                     salesTax = myCart.SalesTax;
                     subtotal = myCart.SubTotal;

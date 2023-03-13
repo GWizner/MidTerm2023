@@ -32,10 +32,6 @@ namespace MidTerm2023
 
             
         }
-        //public void UpdateQuantity(int quantity)
-        //{
-        //    DrinkQuantity += quantity;
-        //}
     }
     public class ViewCart
     {
@@ -50,14 +46,12 @@ namespace MidTerm2023
             decimal salesTax = subtotal * 0.06m;
             SubTotal = subtotal;
             SalesTax = salesTax;
-            //grandTotal = totalPrice + salesTax;
 
 
             for (int i = 0; i < cart.Count; i++)
             {
                 totalPrice += cart[i].DrinkTotal;
                 addOnTotal += cart[i].AddOnPrice;
-                //subtotal += cart[i].DrinkTotal;
 
                 if (cart[i].DrinkName != null)
                 {
