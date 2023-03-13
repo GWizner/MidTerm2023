@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Channels;
 using System.Xml;
@@ -387,9 +388,7 @@ namespace MidTerm2023
                     decimal tender = decimal.Parse(Console.ReadLine());
                     decimal change = Payment.Cash(tender, grandTotal);
                     Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
-                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
-                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Sales Tax:" + "\x1b[31m", salesTax);
-                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", grandTotal);
+                    myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
                     Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Tender:" + "\x1b[31m", tender);
                     Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Change:" + "\x1b[31m", change);
                     Console.WriteLine(" ");
@@ -409,6 +408,12 @@ namespace MidTerm2023
                     Console.Write("Please enter your cards cvv number:");
                     string cvv = Console.ReadLine();
                     Console.WriteLine(Payment.CreditCard(creditcardnumber, expiration, cvv));
+                    decimal tender = grandTotal;
+                    decimal change = 0m;
+                    Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
+                    myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
+                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Tender:" + "\x1b[31m", tender);
+                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Change:" + "\x1b[31m", change);
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
@@ -421,11 +426,19 @@ namespace MidTerm2023
                     Console.WriteLine("Please enter the check number:");
                     int checknumber = int.Parse(Console.ReadLine());
                     Console.WriteLine(Payment.Check(checknumber));
+                    decimal tender = grandTotal;
+                    decimal change = 0m;
+                    Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
+                    myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
+                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Tender:" + "\x1b[31m", tender);
+                    Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Change:" + "\x1b[31m", change);
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
                     Console.WriteLine("Thank you! Have a wonderful day!!!");
                 }
+
+                
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
