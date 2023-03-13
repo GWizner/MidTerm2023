@@ -57,7 +57,7 @@ namespace MidTerm2023
             {
                 totalPrice += cart[i].DrinkTotal;
                 addOnTotal += cart[i].AddOnPrice;
-                subtotal += cart[i].DrinkTotal;
+                //subtotal += cart[i].DrinkTotal;
 
                 if (cart[i].DrinkName != null)
                 {
