@@ -15,6 +15,9 @@ namespace MidTerm2023
         public int DrinkQuantity { get; private set; }
         public string AddOnName { get; private set; }
         public decimal AddOnPrice { get; private set; }
+
+        decimal totalPrice = 0m;
+
         public Cart(string drinkName = null, decimal drinkPrice = 0m, decimal drinkTotal = 0m, int quantity = 0, string addOnName = null, decimal addOnPrice = 0m)
         {
             drinkTotal = drinkPrice * quantity;
@@ -43,18 +46,24 @@ namespace MidTerm2023
             decimal totalPrice = 0m;
             decimal subtotal = drinkTotal + addOnTotal;
             decimal salesTax = subtotal * 0.06m;
-            grandTotal = subtotal + salesTax;
+            //grandTotal = totalPrice + salesTax;
 
 
             for (int i = 0; i < cart.Count; i++)
             {
-                totalPrice += drinkTotal;
+                totalPrice += cart[i].DrinkTotal;
+                addOnTotal += cart[i].AddOnPrice;
+                subtotal += cart[i].DrinkTotal;
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("{0,-15}", cart[i].DrinkName);
-                Console.Write("\x1b[38;5;80m" + "{0}", cart[i].DrinkQuantity);
-                Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].DrinkTotal);
-                Console.ForegroundColor = ConsoleColor.Green;
+                if (cart[i].DrinkName != null)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("{0,-15}", cart[i].DrinkName);
+                    Console.Write("\x1b[38;5;80m" + "{0}", cart[i].DrinkQuantity);
+                    Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].DrinkTotal);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+
 
                 if (cart[i].AddOnName != null)
                 {
@@ -63,11 +72,14 @@ namespace MidTerm2023
                     Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].AddOnPrice);
                     Console.ResetColor();  
                 }
+                subtotal = totalPrice + addOnTotal;
+                salesTax = subtotal * 0.06m;
+                grandTotal = subtotal + salesTax;
             }
             
             Thread.Sleep(800);
             Console.WriteLine("\x1b[38;5;226m" + "--------------------------------");
-            Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", totalPrice);
+            Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Subtotal:" + "\x1b[31m", subtotal);
             Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Sales Tax:" + "\x1b[31m", salesTax);
             Console.WriteLine("{0, -32}{1, 16:C}", "\x1b[38;5;226m" + "Total:" + "\x1b[31m", grandTotal);
             Console.ResetColor();
