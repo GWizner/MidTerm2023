@@ -8,7 +8,6 @@ namespace MidTerm2023
 {
     public class Cart
     {
-
         public string DrinkName { get; private set; }
         public decimal DrinkPrice { get; private set; }
         public decimal DrinkTotal { get; private set; }
@@ -28,7 +27,7 @@ namespace MidTerm2023
             DrinkQuantity = quantity;
             AddOnName = addOnName;
             AddOnPrice = addOnPrice;
-            
+        
 
             
         }

@@ -52,19 +52,19 @@ namespace MidTerm2023
             List<Cart> cart = new List<Cart>();
             List<CoffeeMenu> coffees = new List<CoffeeMenu>()
             {
-                new CoffeeMenu (1, "Espresso", "Strong.", 2.50m) ,
-                new CoffeeMenu (2, "Cappuccino", "Classic.", 3.50m),
-                new CoffeeMenu (3, "Latte", "Frothed milk.", 4.00m),
-                new CoffeeMenu (4, "Americano", "Hot.", 3.00m),
-                new CoffeeMenu (5, "Mocha", "Chocolate.", 4.50m),
-                new CoffeeMenu (6, "Macchiato", "Beverage.", 3.50m),
-                new CoffeeMenu (7, "Flat White", "Similar.", 4.50m),
-                new CoffeeMenu (8, "Irish Coffee", "Cocktail.", 6.00m),
-                new CoffeeMenu (9, "Affogato", "Vanilla.", 5.00m),
-                new CoffeeMenu (10, "French Press", "Coarse.", 6.50m),
-                new CoffeeMenu (11, "Cold Brew", "Cold.", 4.50m),
-                new CoffeeMenu (12, "Nitro Cold Brew", "Nitrogen.", 5.00m),
-                new CoffeeMenu (13, "Iced Coffee", "Iced.", 3.50m)
+                new CoffeeMenu (1, "Espresso", "1 oz. of highly concentrated coffee.", 2.50m) ,
+                new CoffeeMenu (2, "Cappuccino", "Latte made with more foam than steamed milk", 3.50m),
+                new CoffeeMenu (3, "Latte", "A shot of espresso and steamed milk with a touch of foam.", 4.00m),
+                new CoffeeMenu (4, "Americano", "1 shot of espresso + 3 oz. of hot water", 3.00m),
+                new CoffeeMenu (5, "Mocha", "A chocolate espresso drink with steamed milk and foam", 4.50m),
+                new CoffeeMenu (6, "Macchiato", "Espresso-based drink that has a small amount of foam on top", 3.50m),
+                new CoffeeMenu (7, "Flat White", "Basically a cappuccino without the foam or sprinkle.", 4.50m),
+                new CoffeeMenu (8, "Irish Coffee", "Black coffee, whiskey and sugar, topped with whipped cream.", 6.00m),
+                new CoffeeMenu (9, "Affogato", "Served with a scoop of ice cream and a shot of espresso, or two.", 5.00m),
+                new CoffeeMenu (10, "French Press", "Heavy body and robust taste", 6.50m),
+                new CoffeeMenu (11, "Cold Brew", "Steeped coffee beans with cold milk or cream.", 4.50m),
+                new CoffeeMenu (12, "Nitro Cold Brew", "A cold brew coffee with a frothy, Guinness-like consistency", 5.00m),
+                new CoffeeMenu (13, "Iced Coffee", "A coffee with ice; served with a dash of milk, cream or sweetener.", 3.50m)
             };
 
 
@@ -72,11 +72,8 @@ namespace MidTerm2023
             Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
 
 
-
             while (keepAsk)
-            {
-
-                
+            {                           
 
                 while (viewMenu)
                 {
