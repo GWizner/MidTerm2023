@@ -75,8 +75,15 @@ namespace MidTerm2023
             };
 
 
+                string textToCenter = "Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n";
 
-                Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
+                int screenWidth = Console.WindowWidth;
+                int stringWidth = textToCenter.Length;
+                int spaces = (screenWidth / 2) + (stringWidth / 2);
+
+                Console.WriteLine("{0," + spaces + "}", textToCenter);
+
+                //Console.WriteLine("Welcome to the " + "\x1b[38;5;207m" + "JavaDrip" + "\x1b[0m" + ".\n");
 
 
 
