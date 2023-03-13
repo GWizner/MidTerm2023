@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Channels;
 
 namespace MidTerm2023
@@ -76,6 +77,7 @@ namespace MidTerm2023
             {
 
                 
+
                 while (viewMenu)
                 {
                     int counter = 1;
@@ -100,6 +102,7 @@ namespace MidTerm2023
                         //    "\x1b[38;5;94m" + coffee.Description + "\x1b[31m", "", coffee.Price + "\x1b[0m");
                     }
                     noMenu = true;
+
                     while (noMenu)
                     {
                         bool goodAns = false;
@@ -108,8 +111,6 @@ namespace MidTerm2023
                             Console.Write("\nEnter the name of your coffee drink: ");
                             userDrink = Console.ReadLine().ToLower();
                             goodDrink = int.TryParse(userDrink, out drinkNum);
-                            //selectedName = coffees.FirstOrDefault(x => x.Name.Equals(userDrink, StringComparison.OrdinalIgnoreCase));
-
 
                             if (goodDrink)
                             {
@@ -136,12 +137,16 @@ namespace MidTerm2023
                                             drinkPrice = coffeeSearch.Price;
                                             goodAns = true;
                                         }
+                                            
                                     }
                                 }
-                                else
-                                {
-                                    Console.WriteLine("I do not understand your input. Please try again.\n");
-                                }
+                                Console.WriteLine();
+                                goodAns = true;
+                                
+                            }
+                            else 
+                            {
+                                Console.WriteLine("I do not understand your input. Please try again.\n");
                             }
                         }
 
@@ -235,6 +240,7 @@ namespace MidTerm2023
                         //    }
                         //}
 
+
                         if (addOnName != null)
                         {
                             string[] addOnChoices = addOnName.Split(',', StringSplitOptions.RemoveEmptyEntries);
@@ -284,6 +290,7 @@ namespace MidTerm2023
                                 }
                                 else if (purchase == "yes" || purchase == "y")
                                 {
+                                    
                                     while (true)
                                     {
                                         Console.WriteLine("\nWould you like to see our drink menu (y/n)? ");
