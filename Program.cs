@@ -95,14 +95,14 @@ namespace MidTerm2023
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write("{0, -1}{1, -20}", coffee.Id + ". ", coffee.Name);
                                 Console.Write("{0, -30}", "\x1b[38;5;94m" + coffee.Description);
-                                Console.WriteLine("{0, 10:C}", "\x1b[31m" + coffee.Price + "\x1b[0m");
+                                Console.WriteLine("{0, 10:C}", "\x1b[31m" + "$" + coffee.Price + "\x1b[0m");
                             }
                             else
                             {
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write("{0, -1}{1, -21}", coffee.Id + ". ", coffee.Name);
                                 Console.Write("{0, -30}", "\x1b[38;5;94m" + coffee.Description);
-                                Console.WriteLine("{0, 10:C}", "\x1b[31m" + coffee.Price + "\x1b[0m");
+                                Console.WriteLine("{0, 10:C}", "\x1b[31m" + "$" + coffee.Price + "\x1b[0m");
                             }
                             counter++;
                             //Console.WriteLine("{0, -1}{1, -20}{2, -30}{3, 10:C}", coffee.Id + ". ", coffee.Name + 
@@ -394,6 +394,7 @@ namespace MidTerm2023
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
+                    Console.ResetColor();
                     Console.WriteLine("Thank you! Have a wonderful day!!!");
                 }
 
@@ -417,7 +418,9 @@ namespace MidTerm2023
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
+                    Console.ResetColor();
                     Console.WriteLine("Thank you! Have a wonderful day!!!");
+                    
 
                 }
 
@@ -435,6 +438,7 @@ namespace MidTerm2023
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
                     Console.WriteLine(" ");
+                    Console.ResetColor();
                     Console.WriteLine("Thank you! Have a wonderful day!!!");
                 }
 
