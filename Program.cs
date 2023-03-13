@@ -283,6 +283,7 @@ namespace MidTerm2023
                                 {
                                     viewMenu = false;
                                     noMenu = false;
+                                    keepAsk = false;
                                     break;
                                 }
                                 else if (purchase == "yes" || purchase == "y")
@@ -294,6 +295,7 @@ namespace MidTerm2023
                                         string userChoice1 = Console.ReadLine();
                                         if (userChoice1 == "yes" || userChoice1 == "y")
                                         {
+                                            viewMenu = true;
                                             noMenu = false;
                                             break;
                                         }
@@ -318,50 +320,50 @@ namespace MidTerm2023
                         }
                     }
                 }
-                if (!cashOut)
-                {
-                    Console.WriteLine("\nWould you like to remove any items from your cart (y/n)?\n");
-                    string yesNo = Console.ReadLine();
+                //if (!cashOut)
+                //{
+                //    Console.WriteLine("\nWould you like to remove any items from your cart (y/n)?\n");
+                //    string yesNo = Console.ReadLine();
 
-                    if (Validator.GetYesNo(yesNo))
-                    {
-                        if (yesNo.ToLower() == "n")
-                        {
-                            browse = false;
-                        }
-                        else
-                        {
-                            if (cart.Count == 0)
-                            {
-                                Console.WriteLine("\nYour cart is currently empty.");
-                                browse = false;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Please enter the name or item number of the item you would like to remove: ");
-                                userInputA = Console.ReadLine().ToLower();
-                                browse = int.TryParse(userInputA, out itemNo);
-                                bool itemRemoved = myCart.CurrentCart(cart, drinkPrice, userInputA, itemNo, quantity, browse);
-                                if (!itemRemoved)
-                                {
-                                    Console.WriteLine("\nThat item is not in your cart.\n");
-                                }
-                                else
-                                {
-                                    myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
-                                    grandTotal = myCart.GrandTotal;
+                //    if (Validator.GetYesNo(yesNo))
+                //    {
+                //        if (yesNo.ToLower() == "n")
+                //        {
+                //            browse = false;
+                //        }
+                //        else
+                //        {
+                //            if (cart.Count == 0)
+                //            {
+                //                Console.WriteLine("\nYour cart is currently empty.");
+                //                browse = false;
+                //            }
+                //            else
+                //            {
+                //                Console.WriteLine("Please enter the name or item number of the item you would like to remove: ");
+                //                userInputA = Console.ReadLine().ToLower();
+                //                browse = int.TryParse(userInputA, out itemNo);
+                //                bool itemRemoved = myCart.CurrentCart(cart, drinkPrice, userInputA, itemNo, quantity, browse);
+                //                if (!itemRemoved)
+                //                {
+                //                    Console.WriteLine("\nThat item is not in your cart.\n");
+                //                }
+                //                else
+                //                {
+                //                    myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
+                //                    grandTotal = myCart.GrandTotal;
 
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nSorry, didn't catch that.\n");
-                        browse = true;
-                    }
-                }
-                keepAsk = Validator.getContinue();
+                //                }
+                //            }
+                //        }
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine("\nSorry, didn't catch that.\n");
+                //        browse = true;
+                //    }
+                //}
+                //keepAsk = Validator.getContinue();
                 grandTotal = myCart.GrandTotal;
                 salesTax = myCart.SalesTax;
                 subtotal = myCart.SubTotal;
