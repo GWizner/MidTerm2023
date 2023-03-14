@@ -192,31 +192,45 @@ namespace MidTerm2023
                                     break;
                                 }
                             }
-                            Console.Write("would you like any add-ons (y/n)? ");
-                            string userChoice2 = Console.ReadLine().ToLower();
-                            Console.WriteLine();
-
-                            if (userChoice2 == "yes" || userChoice2 == "y")
+                            while (true)
                             {
-                                menu.DisplayAddOns();
-                                Console.Write("\nEnter add-on selection(s) (please seperate choices by a comma): ");
-                                addOnName = Console.ReadLine();
+                                Console.Write("would you like any add-ons (y/n)? ");
+                                string userChoice2 = Console.ReadLine().ToLower();
+                                Console.WriteLine();
 
 
-                                if (addOnName != null)
+                                if (userChoice2 == "yes" || userChoice2 == "y")
                                 {
-                                    string[] addOnChoices = addOnName.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                                    foreach (string currAddOn in addOnChoices)
+                                    menu.DisplayAddOns();
+                                    Console.Write("\nEnter add-on selection(s) (please seperate choices by a comma): ");
+                                    addOnName = Console.ReadLine();
+
+
+                                    if (addOnName != null)
                                     {
-                                        foreach (KeyValuePair<string, decimal> addOn in menu.addOns)
+                                        string[] addOnChoices = addOnName.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                                        foreach (string currAddOn in addOnChoices)
                                         {
-                                            if (string.Equals(currAddOn.Trim(), addOn.Key, StringComparison.OrdinalIgnoreCase))
+                                            foreach (KeyValuePair<string, decimal> addOn in menu.addOns)
                                             {
-                                                cart.Add(new Cart(quantity: 1, addOnName: addOn.Key, addOnPrice: addOn.Value));
-                                                break;
+                                                if (string.Equals(currAddOn.Trim(), addOn.Key, StringComparison.OrdinalIgnoreCase))
+                                                {
+                                                    cart.Add(new Cart(quantity: 1, addOnName: addOn.Key, addOnPrice: addOn.Value));
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
+                                    break;
+                                }
+
+                                else if (userChoice2 == "no" || userChoice2 == "n")
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nI do not understand your input. Please try again.\n");
                                 }
                             }
                             while (browse)
