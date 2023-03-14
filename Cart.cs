@@ -66,10 +66,12 @@ namespace MidTerm2023
                 if (cart[i].AddOnName != null)
                 {
                     Console.Write("{0,-15}", cart[i].AddOnName);
-                    Console.Write("{0}", 1);
+                    Console.Write("{0}", cart[i].DrinkQuantity);
                     Console.WriteLine("\x1b[31m" + "{0,16:C}", cart[i].AddOnPrice);
                     Console.ResetColor();  
                 }
+
+
                 subtotal = totalPrice + addOnTotal;
                 salesTax = subtotal * 0.06m;
                 grandTotal = subtotal + salesTax;

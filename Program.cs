@@ -201,24 +201,24 @@ namespace MidTerm2023
                                 menu.DisplayAddOns();
                                 Console.Write("\nEnter add-on selection(s) (please seperate choices by a comma): ");
                                 addOnName = Console.ReadLine();
-                            }
 
-                            if (addOnName != null)
-                            {
-                                string[] addOnChoices = addOnName.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                                foreach (string currAddOn in addOnChoices)
+
+                                if (addOnName != null)
                                 {
-                                    foreach (KeyValuePair<string, decimal> addOn in menu.addOns)
+                                    string[] addOnChoices = addOnName.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                                    foreach (string currAddOn in addOnChoices)
                                     {
-                                        if (string.Equals(currAddOn.Trim(), addOn.Key, StringComparison.OrdinalIgnoreCase))
+                                        foreach (KeyValuePair<string, decimal> addOn in menu.addOns)
                                         {
-                                            cart.Add(new Cart(quantity: 1, addOnName: addOn.Key, addOnPrice: addOn.Value));
-                                            break;
+                                            if (string.Equals(currAddOn.Trim(), addOn.Key, StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                cart.Add(new Cart(quantity: 1, addOnName: addOn.Key, addOnPrice: addOn.Value));
+                                                break;
+                                            }
                                         }
                                     }
                                 }
                             }
-
                             while (browse)
                             {
                                 myCart.PrintCart(cart, drinkTotal, addOnPrice, grandTotal);
